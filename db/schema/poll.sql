@@ -1,4 +1,4 @@
--- Drop and recreate Polls table (Example)
+-- Drop and recreate Polls table
 
 DROP TABLE IF EXISTS poll CASCADE;
 CREATE TABLE poll (

@@ -1,4 +1,4 @@
--- Drop and recreate Choices table (Example)
+-- Drop and recreate Choices table
 
 DROP TABLE IF EXISTS choices CASCADE;
 CREATE TABLE choices (
