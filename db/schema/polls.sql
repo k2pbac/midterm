@@ -6,8 +6,9 @@ CREATE TABLE polls (
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
   creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  choice_id INTEGER REFERENCES choices(id) ON DELETE CASCADE,
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
+  shared_link VARCHAR(255) NOT NULL,
+  results_link VARCHAR(255) NOT NULL
   is_active BOOLEAN NOT NULL DEFAULT TRUE
 );
