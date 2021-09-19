@@ -1,23 +1,13 @@
 -- Drop and recreate Choices table
 
--- Each choice has its own table
-
-DROP TABLE IF EXISTS choices_a CASCADE;
-CREATE TABLE choices_a (
+DROP TABLE IF EXISTS choices CASCADE;
+CREATE TABLE choices (
   id SERIAL PRIMARY KEY NOT NULL,
-  choice VARCHAR(255) NOT NULL,
-  choice_info TEXT NOT NULL,
-  points INTEGER,
+  choice_a VARCHAR(255) NOT NULL,
+  choice_a_info TEXT NOT NULL,
+  choice_b VARCHAR(255) NOT NULL,
+  choice_b_info TEXT NOT NULL,
+  choice_c VARCHAR(255) NOT NULL,
+  choice_c_info TEXT NOT NULL,
   poll_id INTEGER REFERENCES polls(id) ON DELETE CASCADE,
-  voter_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-);
-
-DROP TABLE IF EXISTS choices_b CASCADE;
-CREATE TABLE choices_b (
-  id SERIAL PRIMARY KEY NOT NULL,
-  choice VARCHAR(255) NOT NULL,
-  choice_info TEXT NOT NULL,
-  points INTEGER,
-  poll_id INTEGER REFERENCES polls(id) ON DELETE CASCADE,
-  voter_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
 );
