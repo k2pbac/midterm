@@ -9,6 +9,7 @@ CREATE TABLE polls (
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
   shared_link VARCHAR(255) NOT NULL,
-  results_link VARCHAR(255) NOT NULL
-  is_active BOOLEAN NOT NULL DEFAULT TRUE
+  results_link VARCHAR(255) NOT NULL,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  max_submission INTEGER DEFAULT 100
 );
