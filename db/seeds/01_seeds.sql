@@ -18,7 +18,7 @@ INSERT INTO options (option, option_info, poll_id) VALUES ('Harry Potter', 'desc
 INSERT INTO options (option, option_info, poll_id) VALUES ('Avengers', 'description', 2);
 INSERT INTO options (option, option_info, poll_id) VALUES ('Rush Hour', 'description', 2);
 INSERT INTO options (option, option_info, poll_id) VALUES ('Game of Thrones', 'description', 3);
-INSERT INTO options (option, option_info, poll_id) VALUES ('Green Eggs and Ham', 'description', 3);
+INSERT INTO options (option, option_info, poll_id) VALUES ('Green Eggs and Ham', 'description', 3)
 
 
 INSERT INTO results (voter_id, option_id, point, poll_id) VALUES (1, 1, 3, 1);

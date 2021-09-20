@@ -41,7 +41,7 @@ const widgetsRoutes = require("./routes/widgets");
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
-
+app.use("/api/results", widgetsRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -49,6 +49,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.get("/", (req, res) => {
   res.render("index");
 });
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
