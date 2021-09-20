@@ -6,5 +6,5 @@ CREATE TABLE results (
   point INTEGER,
   option_id INTEGER REFERENCES options(id) ON DELETE CASCADE,
   voter_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  poll_id INTEGER REFERENCES polls(id) ON DELETE CASCADE,
+  poll_id INTEGER REFERENCES polls(id) ON DELETE CASCADE
 );

@@ -1,9 +1,9 @@
 module.exports = (db) => {
   const applyBordaAlgo = (poll_id) => {
     const queryText = {
-      text: `SELECT * FROM results
+      text: `SELECT voter_id, option, point FROM results
             JOIN options on options.poll_id = results.poll_id
-            WHERE poll_id = $1
+            WHERE options.poll_id = $1 AND results.option_id = options.id;
           `,
       values: [poll_id],
     };
