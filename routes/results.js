@@ -10,7 +10,7 @@ const router = express.Router();
 const dbHelpers = require("./helpers/algoHelpers")(db);
 
 module.exports = () => {
-  router.get("/polls/:poll_id", (req, res) => {
+  router.get("/polls/:poll_id/results", (req, res) => {
     const { poll_id } = req.params;
     //Still need to implement borda algo in function
     dbHelpers.applyBordaAlgo(poll_id);
