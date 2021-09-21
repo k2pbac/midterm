@@ -11,7 +11,19 @@ module.exports = (db) => {
     return db
       .query(queryText)
       .then((data) => {
-        console.log(data.rows);
+        let obj = data.rows;
+        let results = {};
+        for (let choice of obj) {
+          if (results[choice.option]) {
+            results[choice.option] += choice.point;
+          } else {
+            results[choice.option] = choice.point;
+          }
+        }
+
+        console.log(results);
+
+        return { data: data.rows, results };
       })
       .catch((err) => console.log({ err: err.message }));
   };
@@ -31,5 +43,10 @@ module.exports = (db) => {
         console.log("successfully inserted");
       })
       .catch((err) => console.log({ error: err.message }));
+  };
+
+  return {
+    applyBordaAlgo,
+    insertVoterResults,
   };
 };
