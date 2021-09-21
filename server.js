@@ -35,7 +35,7 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
-const newPollsRoutes = require("./routes/new_poll");
+const newPollsRoutes = require("./routes/newPoll");
 const pollsRoutes = require("./routes/polls");
 const resultsRoutes = require("./routes/results");
 
@@ -43,9 +43,11 @@ const resultsRoutes = require("./routes/results");
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/new-poll", newPollsRoutes(db));
+app.use("/api/new_poll", newPollsRoutes(db));
 app.use("/api/polls", pollsRoutes(db));
+//app.use("/api/:poll_id"
 app.use("/api/results", resultsRoutes(db));
+// app.use("/api/:poll_id/results"
 // Note: mount other resources here, using the same pattern above
 
 
