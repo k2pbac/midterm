@@ -5,21 +5,35 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`INSERT INTO polls (title, description, creator_id, created_at, updated_at, shared_link, results_link, is_active)
-    VALUES ($1, $2, $3, $4, $5, $6, $7 $8) RETURNING *`, [title, description, creator_id, created_at, updated_at, shared_link, results_link, is_active])
-      .then(data => {
+  router.get("/polls/new", (req, res) => {
+    //page for new poll goes here
+    res.render("/");
+  });
+  router.post("/polls", (req, res) => {
+    db.query(
+      `INSERT INTO polls (title, description, creator_id, created_at, updated_at, shared_link, results_link, is_active)
+    VALUES ($1, $2, $3, $4, $5, $6, $7 $8) RETURNING *`,
+      [
+        title,
+        description,
+        creator_id,
+        created_at,
+        updated_at,
+        shared_link,
+        results_link,
+        is_active,
+      ]
+    )
+      .then((data) => {
         const polls = data.rows[0];
         res.json({ polls });
       })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
       });
   });
   return router;
