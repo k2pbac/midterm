@@ -13,7 +13,6 @@ const morgan     = require('morgan');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
-console.log(dbParams.rows)
 const db = new Pool(dbParams);
 db.connect();
 

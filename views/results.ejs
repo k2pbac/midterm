@@ -14,46 +14,20 @@
   </head>
 
   <body>
-    <h1>Results Page</h1>
-    <table class="charts-css [ column ] [ show-primary-axis show-4-secondary-axes ] [ data-spacing-4 reverse-data ]">
+    <h1><%= polls[0].question %></h1>
 
-      <caption> Front End Developer Salary </caption>
 
-      <thead>
-        <tr>
-          <th scope="col"> Year </th>
-          <th scope="col"> Income </th>
-        </tr>
-      </thead>
+    <table class="charts-css bar [ show-primary-axis show-4-secondary-axes ] [ data-spacing-4 reverse-data ]">
 
+      <caption> Poll Results </caption>
+
+      <% for (let option of polls) { %>
       <tbody>
         <tr>
-          <th scope="row"> 2016 </th>
-          <td style="--size: calc( 40 / 100 );"> $ 40K </td>
-        </tr>
-        <tr>
-          <th scope="row"> 2017 </th>
-          <td style="--size: calc( 60 / 100 );"> $ 60K </td>
-        </tr>
-        <tr>
-          <th scope="row"> 2018 </th>
-          <td style="--size: calc( 75 / 100 );"> $ 75K </td>
-        </tr>
-        <tr>
-          <th scope="row"> 2019 </th>
-          <td style="--size: calc( 90 / 100 );"> $ 90K </td>
-        </tr>
-        <tr>
-          <th scope="row"> 2020 </th>
-          <td style="--size: calc( 100 / 100 );"> $ 100K <br> 👑 </td>
-        </tr>
-
-        <% for(let points of data)  { %>
-          <div><%= points %></div>
-          <div><%= points.name %></div>
+          <td style="--size: calc(<%= option.point_total %> / <%= total %>) " ><%= option.name %></td>
           <% } %>
+        </tr>
       </tbody>
-
     </table>
 
   </body>
