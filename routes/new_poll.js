@@ -8,6 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 
+/* On create button (etc)
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`INSERT INTO polls (title, description, creator_id, created_at, updated_at, shared_link, results_link, is_active)
@@ -24,3 +25,4 @@ module.exports = (db) => {
   });
   return router;
 };
+*/
