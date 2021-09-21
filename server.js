@@ -44,9 +44,9 @@ app.use(
 const usersRoutes = require("./routes/users");
 const resultsRoutes = require("./routes/results");
 const widgetsRoutes = require("./routes/widgets");
-const newPollsRoutes = require("./routes/newPoll");
+const newPollsRoutes = require("./routes/new_poll");
 const pollsRoutes = require("./routes/polls");
-const resultsRoutes = require("./routes/results");
+// const resultsRoutes = require("./routes/results");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
