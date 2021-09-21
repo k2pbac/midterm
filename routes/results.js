@@ -4,12 +4,29 @@
  *   these routes are mounted onto /users
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
+/*Meg's version
+const express = require('express');
+const router  = express.Router();
 
+module.exports = (db) => {
+  router.get("/", (req, res) => {
+    db.query(`SELECT * FROM results;`)
+      .then(data => {
+        const results = data.rows;
+        console.log(data.rows);
+        res.json({ results });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+*/
 const express = require("express");
 const router = express.Router();
-const dbHelpers = require("./helpers/algoHelpers")(db);
+const dbHelpers = require("../helpers/algoHelpers");
 
-module.exports = () => {
+module.exports = (db) => {
   router.get("/polls/:poll_id/results", (req, res) => {
     const { poll_id } = req.params;
     //Still need to implement borda algo in function
