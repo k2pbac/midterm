@@ -5,21 +5,15 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
+const dbHelpers = require("./helpers/algoHelpers")(db);
 
-module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM results;`)
-      .then(data => {
-        const results = data.rows;
-        res.json({ results });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+module.exports = () => {
+  router.get("/polls/:poll_id", (req, res) => {
+    const { poll_id } = req.params;
+    //Still need to implement borda algo in function
+    dbHelpers.applyBordaAlgo(poll_id);
   });
   return router;
 };
