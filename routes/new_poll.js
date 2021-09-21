@@ -26,6 +26,11 @@ module.exports = (db) => {
       });
   }
 
+  router.get("/", (req, res) => {
+    //page for new poll goes here
+    res.render("new_poll");
+  });
+
   router.post("/", (req, res) => {
     const userId = req.session.userId;
     const pollId = Math.random().toString(36).slice(2, 8);

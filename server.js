@@ -51,7 +51,6 @@ const pollsRoutes = require("./routes/polls");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", usersRoutes(db));
-app.use("/", resultsRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/new_poll", newPollsRoutes(db));
 app.use("/api/polls", pollsRoutes(db));
