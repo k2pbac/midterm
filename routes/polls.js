@@ -9,11 +9,11 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/:poll_id", (req, res) => {
-    db.query(`SELECT * FROM choices;`)
+  router.get("/", (req, res) => {
+    db.query(`SELECT * FROM options;`)
       .then(data => {
-        const choices = data.rows;
-        res.json({ choices });
+        const options = data.rows;
+        res.json({ options });
       })
       .catch(err => {
         res
