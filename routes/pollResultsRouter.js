@@ -21,7 +21,6 @@ const pollResultsRouter = (db) => {
         response.rows.forEach((element) => {
           total += parseInt(element.point_total);
         });
-
         res.render("results", { total, polls: response.rows });
       })
       .catch((err) => {

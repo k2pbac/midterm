@@ -39,4 +39,4 @@ INSERT INTO results (voter_id, option_id, point, poll_id) VALUES (4, 8, 1, 3);
 INSERT INTO results (voter_id, option_id, point, poll_id) VALUES (4, 9, 2, 3);
 INSERT INTO results (voter_id, option_id, point, poll_id) VALUES (2, 8, 1, 3);
 INSERT INTO results (voter_id, option_id, point, poll_id) VALUES (2, 9, 2, 3);
-
+INSERT INTO results (voter_id, option_id, point, poll_id) VALUES (2, 1, 4, 1);
