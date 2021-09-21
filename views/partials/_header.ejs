@@ -1,0 +1,18 @@
+<header>
+  <nav>
+    <a class="navbar-brand" href="/">ToBeNamed</a>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/new-poll">Create Poll</a>
+    </div>
+    <% if (email) { %>
+      <%= email %>
+        <form method="POST" action="/logout">
+          <button type="submit">Logout</button>
+        </form>
+        <% } else { %>
+          <form method="POST" action="/login">
+            <div><label>Email address:</label></div>
+            <input type="email" name="email">
+            <% } %>
+  </nav>
+</header>
