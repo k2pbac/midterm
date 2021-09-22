@@ -19,25 +19,17 @@
     <h1>New Poll</h1>
     <form action="/api/polls" method="POST">
       <div>
-        <h2>
-          <input name="title" type="text" class="question" placeholder="Poll question" maxlength="255">
-        </h2>
+        <h2><input name="title" type="text" class="question" placeholder="Poll question" maxlength="255"></h2>
       </div>
       <ul>
         <input type="hidden">
-        <% for(let i=0; i< 4; i++) { %>
+        <% for (let i = 0; i < 4; i++) { %>
         <li><input name="option<%= i %>" type="text" id="option<%= i %>" class="option" maxlength="255"></li>
-        <li><input name="description<%= i %>" type="text" id="description<%= i %>" class="description" maxlength="255"></li>
+        <li><input name="description<%= i %>" type="text" id="description<%= i %>" class="description" placeholder="Description" maxlength="255"></li>
         <% } %>
-        <!-- <li><input name="option2" type="text" id="option2" class="option" maxlength="255"></li>
-        <li><input name="option3" type="text" id="option3" class="option" maxlength="255"></li>
-        <li><input name="option4" type="text" id="option4" class="option" maxlength="255"></li>
-        <li><input name="option5" type="text" id="option5" class="option" maxlength="255"></li>
-        <li><input name="option6" type="text" id="option6" class="option" maxlength="255"></li>
-        <li><input name="option7" type="text" id="option7" class="option" maxlength="255"></li> -->
       </ul>
       <a href="createField()" id="add_option">Add another option field</a>
-      <button class="btn btn-success">Create poll</button>
+      <div><button class="btn btn-success">Create poll</button></div>
     </form>
   </div>
 </body>
