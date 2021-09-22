@@ -22,6 +22,7 @@ module.exports = (db) => {
         // res
         //   .status(500)
         //   .json({ error: err.message });
+        console.log({error: err.message});
         return {error: err.message}
       });
   }
@@ -32,13 +33,17 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    const userId = req.session.userId;
-    const pollId = Math.random().toString(36).slice(2, 8);
-    newPoll({ ...req.body, owner_id: userId, pollId })
+    const user_id = req.session.user_id;
+    const poll_id = Math.random().toString(36).slice(2, 8);
+    const shared_link = `http://www.localhost:8080/api/polls/${poll_id}`;
+    const results_link = `http://www.localhost:8080/api/polls/${poll_id}/results`;
+    const is_active = true;
+    newPoll({ ...req.body, owner_id: user_id, poll_id, shared_link, results_link, is_active })
       .then(poll => {
         res.send(poll);
       })
       .catch(err => {
+        console.log(err.message);
         console.error(err);
         res.send(err)
       })
