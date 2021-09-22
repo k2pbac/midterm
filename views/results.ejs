@@ -20,11 +20,10 @@
   <body>
     <h1> Question: <%= polls[0].question %></h1>
 
-    <table
-      id="bar-graph" class="charts-css bar show-primary-axis data-spacing-7 show-heading show-labels">
-      <caption>
+    <table id="bar-graph" class="charts-css bar show-primary-axis data-spacing-7 show-heading show-labels">
+     <h3>
         Poll Results
-      </caption>
+    </h3>
 
       <tbody>
         <% for (let option of polls) { %>
@@ -38,11 +37,11 @@
     </table>
 
     <div class="results-table">
-      <table >
+      <table>
 
-      <caption>
+      <h1>
         Voting History
-      </caption>
+      </h1>
 
       <thead>
         <tr>
@@ -64,9 +63,9 @@
     </table>
     </div>
 
-    <div>
+    <div class="poll-button">
       <button type="submit" class="btn btn-outline-danger">
-        Deactivate Poll
+        End Poll
       </button>
     </div>
 
