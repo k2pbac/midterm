@@ -25,7 +25,18 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   }
+  /*
+    const add_field = () => {
+      onclick
+      var nextanswer = document.poll.next.value;
+      var nextname = "answer" + nextanswer;
+      document.getElementById("answer_" + nextanswer).style.display = "";
+      document.forms.poll[nextname].focus();
+      nextanswer++;
+      document.poll.next.value = nextanswer;
 
+    }
+    */
   router.get("/", (req, res) => {
     //page for new poll goes here
     res.render("new_poll");
