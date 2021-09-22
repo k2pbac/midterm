@@ -27,30 +27,35 @@ const pollResultsRouter = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+
+
 // DELETE BEFORE SUMBITTING project! - dev purposes only
-  //  GET/ results/ all polls need
-  // router.get("/", (req, res) => {
-  //   console.log("---++");
-  //   db.query(
-  //     `
-  //   SELECT  options.option as name, SUM(point) as point_total, results.poll_id as poll
-  //   FROM results
-  //   JOIN options ON option_id = options.id
-  //   JOIN polls ON results.poll_id = polls.id
-  //   GROUP BY options.option, results.poll_id
-  //   ORDER BY poll, point_total DESC;`
-  //   )
-  //     .then((response) => {
-  //       let total = 0;
-  //       response.rows.forEach((element) => {
-  //         total += parseInt(element.point_total);
-  //       });
-  //       res.json({ total, data: response.rows });
-  //     })
-  //     .catch((err) => {
-  //       res.status(500).json({ error: err.message });
-  //     });
-  // });
+  router.get("/", (req, res) => {
+      console.log("---++");
+      const promise1 = db.query(
+        `
+      SELECT  options.option as name, SUM(point) as point_total, results.poll_id as poll
+      FROM results
+      JOIN options ON option_id = options.id
+      JOIN polls ON results.poll_id = polls.id
+      GROUP BY options.option, results.poll_id
+      ORDER BY poll, point_total DESC;`
+      );
+      const promise2 = db.query( `SELECT * FROM results`);
+
+      Promise.all([promise1, promise2])
+        .then((response) => {
+          const [result1, result2] = response
+          console.log('++++++', result1.rows)
+          console.log('---------', result2.rows)
+          res.json({ response });
+        })
+        .catch((err) => {
+          res.status(500).json({ error: err.message });
+        });
+    });
+
 
   return router;
 };
