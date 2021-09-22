@@ -26,10 +26,10 @@
           <p><%= poll.description %></p>
           <div id="demo" class="row w-50 mx-auto mt-5 flex-column">
             <div id="poll-options" class="list-group col p-0">
-              <% let count = 1; %> <% for (let option in poll.data) { %>
+              <% let count = 1;  for (let option in poll.data) { %>
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><%= count %> </span>
+                 <span class="input-group-text"><%= count %></span>
                   <input name="<%= poll["option_ids"][count-1] %> " type="text"
                   value="<%= count %> " style="display: none" />
                 </div>
