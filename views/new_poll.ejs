@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/new_poll.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -14,22 +15,28 @@
 
 <body>
   <!-- _header here -->
-  <h1>New Poll</h1>
   <div>
-    <h2>
-      <input type="text" class="question" maxlength="255">
-    </h2>
+    <h1>New Poll</h1>
+    <div>
+      <form action="/polls" method="POST">
+      <h2>
+        <input name="title" type="text" class="question" placeholder="Poll question" maxlength="255">
+      </h2>
+    </div>
+    <ul>
+      <input type="hidden">
+      <li><input name="description" type="text" id="option1" class="option" maxlength="255"></li>
+      <li><input type="text" id="option2" class="option" maxlength="255"></li>
+      <li><input type="text" id="option3" class="option" maxlength="255"></li>
+      <li class="more"><input type="text" id="option4" class="option" maxlength="255"></li>
+      <li class="more"><input type="text" id="option5" class="option" maxlength="255"></li>
+      <li class="more"><input type="text" id="option6" class="option" maxlength="255"></li>
+      <li class="more"><input type="text" id="option7" class="option" maxlength="255"></li>
+    </ul>
+    <a href="createField()" id="add_option">Add another option field</a>
+    <button class="btn btn-success">Create poll</button>
+  </form>
   </div>
-  <ul>
-    <input type="hidden">
-    <li><input type="text" class="option" maxlength="255"></li>
-    <li><input type="text" class="option" maxlength="255"></li>
-    <li><input type="text" class="option" maxlength="255"></li>
-    <li class="more"><input type="text" class="option" maxlength="255"></li>
-    <li class="more"><input type="text" class="option" maxlength="255"></li>
-    <li class="more"><input type="text" class="option" maxlength="255"></li>
-    <li class="more"><input type="text" class="option" maxlength="255"></li>
-  </ul>
 </body>
 
 </html>
