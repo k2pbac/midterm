@@ -14,13 +14,14 @@ const cookieSession = require("cookie-session");
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
+
 db.connect();
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
-
+app.set("json spaces", 2);
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
@@ -43,13 +44,18 @@ app.use(
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const resultsRoutes = require("./routes/results");
+const voteRoutes = require("./routes/votes");
 const widgetsRoutes = require("./routes/widgets");
+const algoHelpers = require("./helpers/algoHelpers")(db);
+const voteHelpers = require("./helpers/votehelpers")(db);
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/", usersRoutes(db));
-app.use("/", resultsRoutes(db));
+app.use("/", usersRoutes());
+app.use("/polls", voteRoutes(voteHelpers));
+app.use("/", resultsRoutes(algoHelpers));
 app.use("/api/widgets", widgetsRoutes(db));
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
