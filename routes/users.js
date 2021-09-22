@@ -10,8 +10,11 @@ const router = express.Router();
 
 module.exports = () => {
   router.get("/login/:id", (req, res) => {
+const {email} = req.body;
+
     // cookie-session
     req.session.user_id = req.params.id;
+    req.session.email = email;
 
     // redirect the client
     res.redirect("/");

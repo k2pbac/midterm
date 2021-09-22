@@ -40,6 +40,11 @@ app.use(
     keys: ["key1", "key2"],
   })
 );
+
+app.use((req, res, next) => {
+res.locals.email = req.session.email;
+next();
+});
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
