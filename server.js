@@ -50,25 +50,19 @@ next();
 const usersRoutes = require("./routes/users");
 const resultsRoutes = require("./routes/results");
 const voteRoutes = require("./routes/votes");
-const widgetsRoutes = require("./routes/widgets");
 
 const newPollsRoutes = require("./routes/new_poll");
 const pollsRoutes = require("./routes/polls");
-const algoHelpers = require("./helpers/algoHelpers")(db);
 const voteHelpers = require("./helpers/votehelpers")(db);
 // const resultsRoutes = require("./routes/results");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/new_poll", newPollsRoutes(db));
+app.use("/polls/new", newPollsRoutes(db));
 app.use("/polls", voteRoutes(voteHelpers));
-app.use("/", resultsRoutes(algoHelpers));
 app.use("/api/polls", pollsRoutes(db));
-//app.use("/api/:poll_id"
 app.use("/api/results", resultsRoutes(db));
-// app.use("/api/:poll_id/results"
 
 // Note: mount other resources here, using the same pattern above
 
