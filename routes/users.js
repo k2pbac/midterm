@@ -8,7 +8,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (db) => {
+module.exports = () => {
   router.get("/login/:id", (req, res) => {
     // cookie-session
     req.session.user_id = req.params.id;
