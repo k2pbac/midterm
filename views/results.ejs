@@ -11,6 +11,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css"
     />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -36,8 +37,9 @@
       </tbody>
     </table>
 
-    <div>
-      <table id="results-table">
+    <div class="results-table">
+      <table >
+
       <caption>
         Voting History
       </caption>
@@ -49,16 +51,23 @@
           <th scope="col"> Point </th>
         </tr>
       </thead>
+
       <tbody>
         <% for (let vote of voteHistory) { %>
           <tr>
-            <th scope ="row"><%= vote.name %></th>
+            <th scope="row"><%= vote.name %></th>
             <td><%= vote.choice %></td>
             <td><%= vote.point %></td>
           </tr>
         <% } %>
       </tbody>
     </table>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-outline-danger">
+        Deactivate Poll
+      </button>
     </div>
 
   </body>

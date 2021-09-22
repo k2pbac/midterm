@@ -19,7 +19,8 @@ const pollResultsRouter = (db) => {
     FROM results
     JOIN users ON voter_id = users.id
     JOIN options ON option_id = options.id
-    WHERE results.poll_id = $1`, [req.params.poll_id]);
+    WHERE results.poll_id = $1
+    ORDER BY users.name, point DESC`, [req.params.poll_id]);
 
     Promise.all([promise1, promise2])
     .then((response) => {
