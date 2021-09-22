@@ -4,7 +4,7 @@ const router = express.Router();
 const pollResultsRouter = (db) => {
   // Get results for a specific poll
   router.get("/:poll_id", (req, res) => {
-    db.query(
+    const promise1 = db.query(
       `
     SELECT  options.option as name, SUM(point) as point_total, results.poll_id as poll, polls.title as question
     FROM results
@@ -14,19 +14,27 @@ const pollResultsRouter = (db) => {
     GROUP BY options.option, results.poll_id, polls.title
     ORDER BY poll, point_total DESC;`,
       [req.params.poll_id]
-    )
-      .then((response) => {
-        // total used for dynamic sizing in bar graph display
-        let total = 0;
-        response.rows.forEach((element) => {
+    );
+
+    const promise2 = db.query(`SELECT * FROM results`);
+
+    Promise.all([promise1, promise2])
+    .then((response) => {
+      const [query1, query2] = response
+      // console.log('++++++', result1.rows)
+      // console.log('---------', result2.rows)
+      let total = 0;
+        query1.rows.forEach((element) => {
           total += parseInt(element.point_total);
         });
-        res.render("results", { total, polls: response.rows });
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
+        console.log(total)
+      // res.json({ data1: result1.rows , data2: result2.rows });
+      res.render("results", { total, polls: query1.rows, voteHistroy: query2.rows });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
 
 
 
@@ -49,7 +57,7 @@ const pollResultsRouter = (db) => {
           const [result1, result2] = response
           console.log('++++++', result1.rows)
           console.log('---------', result2.rows)
-          res.json({ response });
+          res.json({ data1: result1.rows , data2: result2.rows });
         })
         .catch((err) => {
           res.status(500).json({ error: err.message });

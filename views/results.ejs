@@ -35,5 +35,23 @@
         </tr>
       </tbody>
     </table>
+    <div>
+      <table
+      id="bar-graph" class="charts-css bar show-primary-axis data-spacing-7 show-heading show-labels">
+      <caption>
+        Poll Results
+      </caption>
+
+      <tbody>
+        <% for (let option of polls) { %>
+        <tr>
+          <th scope="row"><%= option.name %> </th>
+          <td style="--size: calc(<%= option.point_total %> / <%= total %>)">
+          </td>
+          <% } %>
+        </tr>
+      </tbody>
+    </table>
+    </div>
   </body>
 </html>
