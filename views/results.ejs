@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <h1><%= polls[0].question %></h1>
+    <h1> Question: <%= polls[0].question %></h1>
 
     <table
       id="bar-graph" class="charts-css bar show-primary-axis data-spacing-7 show-heading show-labels">
@@ -35,23 +35,31 @@
         </tr>
       </tbody>
     </table>
+
     <div>
-      <table
-      id="bar-graph" class="charts-css bar show-primary-axis data-spacing-7 show-heading show-labels">
+      <table id="results-table">
       <caption>
-        Poll Results
+        Voting History
       </caption>
 
-      <tbody>
-        <% for (let option of polls) { %>
+      <thead>
         <tr>
-          <th scope="row"><%= option.name %> </th>
-          <td style="--size: calc(<%= option.point_total %> / <%= total %>)">
-          </td>
-          <% } %>
+          <th scope="col"> Name </th>
+          <th scope="col"> Choice </th>
+          <th scope="col"> Point </th>
         </tr>
+      </thead>
+      <tbody>
+        <% for (let vote of voteHistory) { %>
+          <tr>
+            <th scope ="row"><%= vote.name %></th>
+            <td><%= vote.choice %></td>
+            <td><%= vote.point %></td>
+          </tr>
+        <% } %>
       </tbody>
     </table>
     </div>
+
   </body>
 </html>
