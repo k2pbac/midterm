@@ -18,14 +18,14 @@
   <div>
     <h1>New Poll</h1>
     <div>
+      <form action="/polls" method="POST">
       <h2>
-        <input type="text" class="question" placeholder="Poll question" maxlength="255">
+        <input name="title" type="text" class="question" placeholder="Poll question" maxlength="255">
       </h2>
     </div>
-    <form action="/" method="POST">
     <ul>
       <input type="hidden">
-      <li><input type="text" id="option1" class="option" maxlength="255"></li>
+      <li><input name="description" type="text" id="option1" class="option" maxlength="255"></li>
       <li><input type="text" id="option2" class="option" maxlength="255"></li>
       <li><input type="text" id="option3" class="option" maxlength="255"></li>
       <li class="more"><input type="text" id="option4" class="option" maxlength="255"></li>
@@ -33,7 +33,7 @@
       <li class="more"><input type="text" id="option6" class="option" maxlength="255"></li>
       <li class="more"><input type="text" id="option7" class="option" maxlength="255"></li>
     </ul>
-    <a href="add_field()" id="add_option">Add another option field</a>
+    <a href="createField()" id="add_option">Add another option field</a>
     <button class="btn btn-success">Create poll</button>
   </form>
   </div>

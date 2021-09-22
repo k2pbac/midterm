@@ -1,5 +1,5 @@
 const express = require("express");
-const results = require("./results");
+
 const router = express.Router();
 
 module.exports = (voteHelpers) => {
