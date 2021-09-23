@@ -1,40 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Create Poll</title>
 
-<head>
-  <title>Create Poll</title>
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
+      rel="stylesheet"
+    />
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/create_poll.js"></script>
-</head>
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/create_poll.js"></script>
+  </head>
 
-<body>
-
-  <%- include("./partials/_header")  %>
-  <div>
-    <h1>New Poll</h1>
-    <form action="/api/polls" method="POST">
-      <div>
-        <h2><input name="title" type="text" class="question" placeholder="Poll question" maxlength="255"></h2>
-        <h4><input name="description" type="text" id="description" class="description" placeholder="Poll description" maxlength="255"></h4>
-      </div>
-      <ul>
-        <% for (let i = 1; i < 5; i++) { %>
-        <br>
-        <li><input name="option<%= i %>" type="text" id="option<%= i %>" class="option" maxlength="255"></li>
-        <li><input name="description<%= i %>" type="text" id="description<%= i %>" class="description" placeholder="Description" maxlength="255"></li>
-        <% } %>
-      </ul>
-      <a href="javascript:addField()" id="add_option">Add another option field</a>
-      <div><button class="btn btn-success">Create poll</button></div>
-    </form>
-
-  </div>
-</body>
-
+  <body>
+    <%- include("./partials/_header") %>
+    <div>
+      <h1>New Poll</h1>
+      <form action="/api/polls" method="POST">
+        <div>
+          <h2>
+            <input
+              name="title"
+              type="text"
+              class="question"
+              placeholder="Poll question"
+              maxlength="255"
+            />
+          </h2>
+          <h4>
+            <input
+              name="description"
+              type="text"
+              id="description"
+              class="description"
+              placeholder="Poll description"
+              maxlength="255"
+            />
+          </h4>
+        </div>
+        <ul>
+          <input type="hidden" />
+          <% for (let i = 1; i < 5; i++) { %>
+          <br />
+          <li>
+            <input
+              name="option<%= i %>"
+              type="text"
+              id="option<%= i %>"
+              class="option"
+              maxlength="255"
+            />
+          </li>
+          <li>
+            <input
+              name="description<%= i %>"
+              type="text"
+              id="description<%= i %>"
+              class="description"
+              placeholder="Description"
+              maxlength="255"
+            />
+          </li>
+          <% } %>
+        </ul>
+        <a href="javascript:addField()" id="add_option"
+          >Add another option field</a
+        >
+        <div><button class="btn btn-success">Create poll</button></div>
+      </form>
+    </div>
+  </body>
 </html>

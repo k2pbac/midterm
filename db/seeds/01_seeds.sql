@@ -4,7 +4,7 @@ INSERT INTO users (name, email) VALUES ('Alice', 'alice@email.com');
 INSERT INTO users (name, email) VALUES ('Kira', 'kira@email.com');
 INSERT INTO users (name, email) VALUES ('Michael', 'b@b.com');
 INSERT INTO users (name, email) VALUES ('James', 'jamesa@gmail.com');
-INSERT INTO users (email) VALUES ( 'jsa@gmail.com');
+INSERT INTO users (email) VALUES ('jsa@gmail.com');
 
 
 INSERT INTO polls ( title, description, creator_id, shared_link, results_link, is_active ) VALUES ('Where to hold conference', 'Location to hold LHLExpo', 1, 'www.example.com', 'www.example.com', TRUE);
