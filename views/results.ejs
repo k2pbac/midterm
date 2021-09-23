@@ -11,64 +11,107 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css"
     />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
 
   <body>
-    <h1> <%= polls[0].question %> </h1>
+    <h1><%= polls[0].question %></h1>
 
-    <table id="bar-graph" class="charts-css bar show-primary-axis data-spacing-7 show-labels hide-data show-data-on-hover">
-     <h3>
-        Poll Results:
-    </h3>
+    <table
+      id="bar-graph"
+      class="
+        charts-css
+        bar
+        show-primary-axis
+        data-spacing-7
+        show-labels
+        hide-data
+        show-data-on-hover
+      "
+    >
+      <h3>Poll Results:</h3>
 
       <tbody>
         <% for (let option of polls) { %>
+          <% if (option === polls[0]) { %>
         <tr>
-          <th scope="row"><%= option.name %> </th>
-          <td style="--size: calc(<%= option.point_total %> / <%= total %>)"> <span class="data"> <%= option.point_total %> (<%= Math.round(option.point_total/total*100) %> %) </span></td>
+          <th scope="row"><%= option.name %></th>
+          <td
+            class="highlighted"
+            style="--size: calc(<%= option.point_total %> / <%= total %>)">
+            <span class="tooltip"> <%= option.name %> leads with <%= option.point_total %> total points</span>
+            <%= option.point_total %>
+            (<%=Math.round(option.point_total/total*100) %> %)
+            <br />👑
+          </td>
+        </tr>
+        <% } else if (option.point_total === polls[0].point_total) { %>
+        <tr>
+          <th scope="row"><%= option.name %></th>
+          <td
+            class="highlighted"
+            style="--size: calc(<%= option.point_total %> / <%= total %>)">
+            <span class="tooltip"> <%= option.name %> leads with <%= option.point_total %> total points</span>
+            <%= option.point_total %>
+            (<%=Math.round(option.point_total/total*100) %> %)
+            <br />👑
+          </td>
+        </tr>
+        <% } else { %>
+        <tr>
+          <th scope="row"><%= option.name %></th>
+          <td style="--size: calc(<%= option.point_total %> / <%= total %>)">
+            <span class="data">
+            <span class="tooltip"> <%= option.name %> has <%= option.point_total %> total points</span>
+              <%= option.point_total %>
+              (<%=Math.round(option.point_total/total*100) %> %)
+            </span>
+          </td>
           <% } %>
+        <% } %>
         </tr>
       </tbody>
     </table>
 
+    <h1>Voting History</h1>
+    <center>
     <div class="results-table">
+
       <table>
-
-      <h1>
-        Voting History
-      </h1>
-
-      <thead>
-        <tr>
-          <th scope="col"> Name </th>
-          <th scope="col"> Choice </th>
-          <th scope="col"> Point </th>
-        </tr>
-      </thead>
-
-      <tbody class="insert-data">
-        <% for (let vote of voteHistory) { %>
+        <thead class="purple">
           <tr>
+            <th scope="col">Voter Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Choice</th>
+            <th scope="col">Point</th>
+          </tr>
+        </thead>
+
+        <tbody class="insert-data">
+          <% for (let vote of voteHistory) { %>
+          <tr>
+            <td scope="row"><%= vote.users_id %></td>
             <td scope="row"><%= vote.name %></td>
             <td scope="row"><%= vote.choice %></td>
             <td scope="row"><%= vote.point %></td>
           </tr>
-        <% } %>
-      </tbody>
+          <% } %>
 
-    </table>
-
+        </tbody>
+      </table>
     </div>
+  </center>
 
     <div class="poll-button">
-      <button type="submit" class="btn btn-outline-danger">
-        End Poll
-      </button>
+      <button type="submit" class="btn btn-outline-danger">End Poll</button>
     </div>
-
   </body>
 </html>
