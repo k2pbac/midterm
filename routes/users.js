@@ -10,7 +10,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.post("/login", (req, res) => {
-const {email} = req.body;
+    const { email } = req.body;
 
     // cookie-session
     req.session.user_id = req.params.id;
@@ -25,8 +25,7 @@ const {email} = req.body;
     req.session.email = null;
 
     res.redirect("back");
+  });
 
-  })
   return router;
-
-}
+};

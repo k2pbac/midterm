@@ -16,7 +16,9 @@ module.exports = (voteHelpers) => {
     console.log(req.body);
     voteHelpers
       .insertUserVote(poll_id, req.body)
-      .then((results) => {pollHelpers.emailLinksToUser(); res.redirect("/"); })
+      .then((results) => {
+        res.redirect("/");
+      })
       .catch((err) => console.log({ error: err.message }));
   });
   return router;

@@ -69,6 +69,8 @@ app.use("/api/polls", pollsRoutes(db));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
+// const usersRoutes = require("./routes/users");
+
 const pollResultsRouter = require("./routes/pollResultsRouter");
 
 // Mount all resource routes
@@ -76,7 +78,7 @@ const pollResultsRouter = require("./routes/pollResultsRouter");
 app.use("/api/users", usersRoutes(db));
 // Note: mount other resources here, using the same pattern above
 // app.use("/api/results", resultsRoutes(db)); For rendering the page
-app.use('/results', pollResultsRouter(db));
+app.use("/results", pollResultsRouter(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -89,7 +91,6 @@ app.get("/", (req, res) => {
     })
     .catch((err) => err.message);
 });
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
