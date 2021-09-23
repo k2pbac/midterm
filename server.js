@@ -69,14 +69,11 @@ app.use("/api/polls", pollsRoutes(db));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-// const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
 const pollResultsRouter = require("./routes/pollResultsRouter");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 // app.use("/api/results", resultsRoutes(db)); For rendering the page
 app.use('/results', pollResultsRouter(db));
