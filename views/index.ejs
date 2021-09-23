@@ -7,11 +7,60 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
+      rel="stylesheet"
+    />
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
 
   <body>
-    <h1>Hello World!</h1>
+    <%- include("./partials/_header") %>
+
+    <header class="jumbotron text-center">
+      <h1 class="display-4">Insert Name here</h1>
+      <hr class="my-4" />
+      <p class="lead">
+        With our innovative and unqiue interface you can create your own polls
+        <br />
+        or be part of the vote to make important decisions, with ease.
+      </p>
+    </header>
+
+    <main class="border w-75 container p-4">
+      <h1 class="text-center">Active Polls</h1>
+      <hr class="mb-5 mt-3 w-50 shadow-sm" />
+      <div class="row m-3">
+        <% for (let poll of polls) { %>
+        <div class="col-md-6 col-sm-8 p-3">
+          <div class="card p-0 text-center">
+            <h5 class="card-header"><%= poll.title %></h5>
+            <div class="card-body">
+              <p class="card-text"><%= poll.description %></p>
+              <a
+                href="/polls/<%= poll.id %>"
+                class="btn btn-sm btn-outline-primary"
+                >Vote</a
+              >
+              <br />
+              <span class="text-muted float-right"
+                >Created by <%= poll.name %>
+              </span>
+            </div>
+          </div>
+          <!-- <div class="card-footer text-muted d-flex justify-content-end">
+            <span class="">Created by <%= poll.name %> </span>
+          </div> -->
+        </div>
+        <% } %>
+      </div>
+    </main>
   </body>
 </html>

@@ -16,6 +16,7 @@ module.exports = (db) => {
       .then(data => {
         const polls = data.rows[0];
         console.log(data.rows[0]);
+
         router.post("/", (req, res) => {
           const user_id = req.session.user_id;
           const poll_id = Math.random().toString(36).slice(2, 8);
@@ -41,6 +42,7 @@ module.exports = (db) => {
         //   .json({ error: err.message });
         console.log({error: err.message});
         return {error: err.message}
+
       });
   }
 
@@ -48,6 +50,7 @@ module.exports = (db) => {
     //page for new poll goes here
     res.render("new_poll");
   });
+
 
   return router;
 };
