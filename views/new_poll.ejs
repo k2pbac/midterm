@@ -10,6 +10,7 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/create_poll.js"></script>
 </head>
 
 <body>
@@ -23,12 +24,13 @@
       </div>
       <ul>
         <input type="hidden">
-        <% for (let i = 0; i < 4; i++) { %>
+        <% for (let i = 1; i < 5; i++) { %>
+        <br>
         <li><input name="option<%= i %>" type="text" id="option<%= i %>" class="option" maxlength="255"></li>
         <li><input name="description<%= i %>" type="text" id="description<%= i %>" class="description" placeholder="Description" maxlength="255"></li>
         <% } %>
       </ul>
-      <a href="javascript:createField()" id="add_option">Add another option field</a>
+      <a href="javascript:addField()" id="add_option">Add another option field</a>
       <div><button class="btn btn-success">Create poll</button></div>
     </form>
   </div>

@@ -40,6 +40,7 @@ module.exports = (db) => {
     const is_active = true;
     newPoll({ ...req.body, owner_id: user_id, poll_id, shared_link, results_link, is_active })
       .then(poll => {
+        // ^Error right before ".then"
         res.send(poll);
       })
       .catch(err => {
