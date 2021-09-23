@@ -44,7 +44,11 @@
             <h5 class="card-header"><%= poll.title %></h5>
             <div class="card-body">
               <p class="card-text"><%= poll.description %></p>
-              <a href="#" class="btn btn-sm btn-outline-primary">Vote</a>
+              <a
+                href="/polls/<%= poll.id %>"
+                class="btn btn-sm btn-outline-primary"
+                >Vote</a
+              >
               <br />
               <span class="text-muted float-right"
                 >Created by <%= poll.name %>
