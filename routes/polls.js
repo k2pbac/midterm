@@ -9,20 +9,21 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  const pollOptions = (options) => {
+  const pollOptions = () => {
     db.query(`SELECT * FROM options;`)
       .then((data) => {
         const options = data.rows;
         console.log(data.rows);
-        res.json({ options });
+        return { options };
       })
       .catch((err) => {
-        res.status(500).json({ error: err.message });
+        // res.status(500).json({ error: err.message });
+        return {error: err.message};
       });
   };
 
   router.get("/", (req, res) => {
-    db.pollOptions(options)
+    pollOptions(options)
       .then((options) => {
         res.send({ options });
       })

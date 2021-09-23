@@ -8,7 +8,6 @@
 const express = require('express');
 const router = express.Router();
 
-//On create button (etc)
 module.exports = (db) => {
   const newPoll = (poll) => {
     db.query(`INSERT INTO polls (title, description, creator_id, created_at, updated_at, shared_link, results_link, is_active, max_submission)
@@ -17,10 +16,33 @@ module.exports = (db) => {
       .then(data => {
         const polls = data.rows[0];
         console.log(data.rows[0]);
-        return polls;
+
+        router.post("/", (req, res) => {
+          const user_id = req.session.user_id;
+          const poll_id = Math.random().toString(36).slice(2, 8);
+          const shared_link = `http://www.localhost:8080/api/polls/${poll_id}`;
+          const results_link = `http://www.localhost:8080/api/polls/${poll_id}/results`;
+          const is_active = true;
+          newPoll({ ...req.body, owner_id: user_id, poll_id, shared_link, results_link, is_active })
+            .then(poll => {
+              res.send(poll);
+            })
+            .catch(err => {
+              console.log(err.message);
+              console.error(err);
+              res.send(err)
+            })
+        })
+
+        return { polls };
       })
       .catch(err => {
-        return console.log({ error: err.message });
+        // res
+        //   .status(500)
+        //   .json({ error: err.message });
+        console.log({error: err.message});
+        return {error: err.message}
+
       });
   }
 
@@ -29,50 +51,6 @@ module.exports = (db) => {
     res.render("new_poll");
   });
 
-  router.post("/", (req, res) => {
-    const userId = req.session.userId;
-    const pollId = Math.random().toString(36).slice(2, 8);
-    newPoll({ ...req.body, owner_id: userId, pollId })
-      .then(poll => {
-        res.send(poll);
-      })
-      .catch(err => {
-        console.error(err);
-        res.send(err)
-      })
-  })
-  return router;
-};
 
-/*Kris' version
-module.exports = (db) => {
-  router.get("/polls/new", (req, res) => {
-    //page for new poll goes here
-    res.render("/");
-  });
-  router.post("/polls", (req, res) => {
-    db.query(
-      `INSERT INTO polls (title, description, creator_id, created_at, updated_at, shared_link, results_link, is_active)
-    VALUES ($1, $2, $3, $4, $5, $6, $7 $8) RETURNING *`,
-      [
-        title,
-        description,
-        creator_id,
-        created_at,
-        updated_at,
-        shared_link,
-        results_link,
-        is_active,
-      ]
-    )
-      .then((data) => {
-        const polls = data.rows[0];
-        res.json({ polls });
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
   return router;
 };
-*/
