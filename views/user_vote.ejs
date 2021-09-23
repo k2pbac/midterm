@@ -19,20 +19,21 @@
     <link rel="stylesheet" href="/styles/voter.css" type="text/css" />
   </head>
   <body>
-    <%- include("./partials/_header")  %>
+    <%- include("./partials/_header") %>
     <main>
-      <form action="/polls/<%= poll.poll_id %> /vote" method="POST">
+      <form action="/polls/<%= poll.poll_id %>/vote" method="POST">
         <div class="container text-center border p-5 mt-3 w-50 shadow">
           <h1><%= poll.title %>?</h1>
           <p><%= poll.description %></p>
           <div id="demo" class="row w-50 mx-auto mt-5 flex-column">
             <div id="poll-options" class="list-group col p-0">
-              <% let count = 1;  for (let option in poll.data) { %>
+              <% let count = 1; for (let option in poll.data) { %>
               <div class="input-group">
                 <div class="input-group-prepend">
-                 <span class="input-group-text"><%= count %></span>
-                  <input name="<%= poll["option_ids"][count-1] %> " type="text"
-                  value="<%= count %> " style="display: none" />
+                  <span class="input-group-text"><%= count %></span>
+                  <input name="<%= poll["option_ids"][count-1] %>" type="text"
+                  value="<%= poll["option_ids"][count-1]%>" style="display:
+                  none" />
                 </div>
                 <div class="form-control list-group-item nested-1 sortOption">
                   <%= option%>
