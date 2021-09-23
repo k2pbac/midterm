@@ -25,6 +25,11 @@
         <div class="container text-center border p-5 mt-3 w-50 shadow">
           <h1><%= poll.title %>?</h1>
           <p><%= poll.description %></p>
+
+          <div>
+            <label for="name">Name: (optional)</label>
+            <input name="name" type="text" placeholder="Name" />
+          </div>
           <div id="demo" class="row w-50 mx-auto mt-5 flex-column">
             <div id="poll-options" class="list-group col p-0">
               <% let count = 1; for (let option in poll.data) { %>

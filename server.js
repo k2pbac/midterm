@@ -60,7 +60,7 @@ const pollHelpers = require("./helpers/pollHelpers");
 // Note: Feel free to replace the example routes below with your own
 app.use("/", usersRoutes(userHelpers));
 app.use("/api/polls", newPollsRoutes(db));
-app.use("/polls", voteRoutes(voteHelpers));
+app.use("/polls", voteRoutes(voteHelpers, userHelpers));
 app.use("/polls", newPollsRoutes(db));
 app.use("/api/polls", pollsRoutes(db));
 

@@ -32,14 +32,15 @@ module.exports = (db) => {
       .catch((err) => console.log({ err: err.message }));
   };
 
-  const insertUserVote = (poll_id, vote_data) => {
+  const insertUserVote = (poll_id, vote_data, voter_id) => {
+    console.log(vote_data);
     const values = [];
     for (let vote in vote_data) {
       for (let point of vote_data[vote]) {
         values.push([
           Object.values(vote_data).length + 1 - Number(point),
           vote,
-          1,
+          voter_id,
           poll_id,
         ]);
       }

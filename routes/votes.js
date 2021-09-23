@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (voteHelpers) => {
+module.exports = (voteHelpers, userHelpers) => {
   router.get("/:poll_id", (req, res) => {
     const { poll_id } = req.params;
     voteHelpers
@@ -11,13 +11,22 @@ module.exports = (voteHelpers) => {
   });
   router.post("/:poll_id/vote", (req, res) => {
     const { poll_id } = req.params;
-    console.log(req.body);
-    voteHelpers
-      .insertUserVote(poll_id, req.body)
+    const { name } = req.body;
+    delete req.body.name;
+
+    userHelpers
+      .insertVoter(name)
       .then((results) => {
-        res.redirect("/");
+        console.log("User ID:", results);
+
+        voteHelpers
+          .insertUserVote(poll_id, req.body, results)
+          .then((results2) => {
+            res.redirect("/");
+          })
+          .catch((err) => console.log({ error: err.message }));
       })
-      .catch((err) => console.log({ error: err.message }));
+      .catch((err) => err.message);
   });
   return router;
 };
