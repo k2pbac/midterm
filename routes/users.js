@@ -8,7 +8,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = () => {
+module.exports = (db) => {
   router.post("/login", (req, res) => {
 const {email} = req.body;
 
