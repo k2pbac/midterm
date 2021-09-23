@@ -8,10 +8,21 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (db) => {
+module.exports = (userHelpers) => {
   router.post("/login", (req, res) => {
     const { email } = req.body;
 
+    userHelpers
+      .insertUser(email)
+      .then((result) => {
+        console.log(result);
+        res.redirect("/");
+      })
+      .catch((err) => {
+        err.message;
+      });
+
+    console.log("Email:", email);
     // cookie-session
     req.session.user_id = req.params.id;
     req.session.email = email;
@@ -25,9 +36,7 @@ module.exports = (db) => {
     req.session.email = null;
 
     res.redirect("back");
-
   });
 
   return router;
-
 };
