@@ -5,15 +5,27 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
   const newPoll = (poll) => {
-    db.query(`INSERT INTO polls (title, description, creator_id, created_at, updated_at, shared_link, results_link, is_active, max_submission)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`, [poll.title, poll.description, poll.creator_id, poll.created_at, poll.updated_at, poll.shared_link, poll.results_link, poll.is_active, poll.max_submission]
+    db.query(
+      `INSERT INTO polls (title, description, creator_id, created_at, updated_at, shared_link, results_link, is_active, max_submission)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+      [
+        poll.title,
+        poll.description,
+        poll.creator_id,
+        poll.created_at,
+        poll.updated_at,
+        poll.shared_link,
+        poll.results_link,
+        poll.is_active,
+        poll.max_submission,
+      ]
     )
-      .then(data => {
+      .then((data) => {
         const polls = data.rows[0];
         console.log(data.rows[0]);
 
@@ -23,34 +35,39 @@ module.exports = (db) => {
           const shared_link = `http://www.localhost:8080/api/polls/${poll_id}`;
           const results_link = `http://www.localhost:8080/api/polls/${poll_id}/results`;
           const is_active = true;
-          newPoll({ ...req.body, owner_id: user_id, poll_id, shared_link, results_link, is_active })
-            .then(poll => {
+          newPoll({
+            ...req.body,
+            owner_id: user_id,
+            poll_id,
+            shared_link,
+            results_link,
+            is_active,
+          })
+            .then((poll) => {
               res.send(poll);
             })
-            .catch(err => {
+            .catch((err) => {
               console.log(err.message);
               console.error(err);
-              res.send(err)
-            })
-        })
+              res.send(err);
+            });
+        });
 
         return { polls };
       })
-      .catch(err => {
+      .catch((err) => {
         // res
         //   .status(500)
         //   .json({ error: err.message });
-        console.log({error: err.message});
-        return {error: err.message}
-
+        console.log({ error: err.message });
+        return { error: err.message };
       });
-  }
+  };
 
-  router.get("/new", (req, res) => {
+  router.get("/", (req, res) => {
     //page for new poll goes here
     res.render("new_poll");
   });
-
 
   return router;
 };
