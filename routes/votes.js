@@ -1,13 +1,11 @@
 const express = require("express");
-const pollHelpers = require("../helpers/pollHelpers");
 const router = express.Router();
 
 module.exports = (voteHelpers) => {
   router.get("/:poll_id", (req, res) => {
     const { poll_id } = req.params;
-
     voteHelpers
-      .renderPollView(poll_id)
+      .renderVoterView(poll_id)
       .then((result) => res.render("user_vote", { poll: result }))
       .catch((err) => res.send(err.message));
   });

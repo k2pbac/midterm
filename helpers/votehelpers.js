@@ -1,16 +1,15 @@
 var format = require("pg-format");
 
 module.exports = (db) => {
-  const renderPollView = (poll_id) => {
+  const renderVoterView = (poll_id) => {
     const queryText = {
-      text: `SELECT *, name, options.id, polls.id FROM polls
+      text: `SELECT *, name, options.id as option_id, polls.id as poll_id FROM polls
             JOIN options on poll_id = polls.id
             JOIN users on creator_id = users.id
             WHERE options.poll_id = $1;
           `,
       values: [poll_id],
     };
-    console.log(poll_id);
     return db
       .query(queryText)
       .then((data) => {
@@ -20,7 +19,7 @@ module.exports = (db) => {
         let option_ids = [];
         for (let row of obj) {
           results[row.option] = row.description;
-          option_ids.push(row.id);
+          option_ids.push(row.option_id);
         }
         return {
           title: obj[0].title,
@@ -35,14 +34,15 @@ module.exports = (db) => {
 
   const insertUserVote = (poll_id, vote_data) => {
     const values = [];
-
     for (let vote in vote_data) {
-      values.push([
-        Object.values(vote_data).length + 1 - Number(vote_data[vote]),
-        vote,
-        1,
-        poll_id,
-      ]);
+      for (let point of vote_data[vote]) {
+        values.push([
+          Object.values(vote_data).length + 1 - Number(point),
+          vote,
+          1,
+          poll_id,
+        ]);
+      }
     }
     return db
       .query(
@@ -58,7 +58,7 @@ module.exports = (db) => {
   };
 
   return {
-    renderPollView,
+    renderVoterView,
     insertUserVote,
   };
 };
