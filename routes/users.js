@@ -8,7 +8,6 @@
 const express = require("express");
 const router = express.Router();
 
-<<<<<<< HEAD
 module.exports = () => {
   router.post("/login", (req, res) => {
 const {email} = req.body;
@@ -26,7 +25,6 @@ const {email} = req.body;
     req.session.email = null;
 
     res.redirect("back");
-=======
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -40,7 +38,7 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
->>>>>>> Results_graphs
   });
   return router;
-};
+}}
+)}
