@@ -23,6 +23,7 @@
   </head>
 
   <body>
+    <%- include("./partials/_header") %>
     <h1><%= polls[0].question %></h1>
 
     <table
@@ -40,14 +41,17 @@
       <h3>Poll Results:</h3>
 
       <tbody>
-        <% for (let option of polls) { %>
-          <% if (option === polls[0]) { %>
+        <% for (let option of polls) { %> <% if (option === polls[0]) { %>
         <tr>
           <th scope="row"><%= option.name %></th>
           <td
             class="highlighted"
-            style="--size: calc(<%= option.point_total %> / <%= total %>)">
-            <span class="tooltip"> <%= option.name %> leads with <%= option.point_total %> total points</span>
+            style="--size: calc(<%= option.point_total %> / <%= total %>)"
+          >
+            <span class="tooltip">
+              <%= option.name %> leads with <%= option.point_total %> total
+              points</span
+            >
             <%= option.point_total %>
             (<%=Math.round(option.point_total/total*100) %> %)
             <br />👑
@@ -58,8 +62,12 @@
           <th scope="row"><%= option.name %></th>
           <td
             class="highlighted"
-            style="--size: calc(<%= option.point_total %> / <%= total %>)">
-            <span class="tooltip"> <%= option.name %> leads with <%= option.point_total %> total points</span>
+            style="--size: calc(<%= option.point_total %> / <%= total %>)"
+          >
+            <span class="tooltip">
+              <%= option.name %> leads with <%= option.point_total %> total
+              points</span
+            >
             <%= option.point_total %>
             (<%=Math.round(option.point_total/total*100) %> %)
             <br />👑
@@ -70,45 +78,45 @@
           <th scope="row"><%= option.name %></th>
           <td style="--size: calc(<%= option.point_total %> / <%= total %>)">
             <span class="data">
-            <span class="tooltip"> <%= option.name %> has <%= option.point_total %> total points</span>
+              <span class="tooltip">
+                <%= option.name %> has <%= option.point_total %> total
+                points</span
+              >
               <%= option.point_total %>
               (<%=Math.round(option.point_total/total*100) %> %)
             </span>
           </td>
-          <% } %>
-        <% } %>
+          <% } %> <% } %>
         </tr>
       </tbody>
     </table>
 
     <h1>Voting History</h1>
     <center>
-    <div class="results-table">
+      <div class="results-table">
+        <table>
+          <thead class="purple">
+            <tr>
+              <th scope="col">Voter Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Choice</th>
+              <th scope="col">Point</th>
+            </tr>
+          </thead>
 
-      <table>
-        <thead class="purple">
-          <tr>
-            <th scope="col">Voter Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Choice</th>
-            <th scope="col">Point</th>
-          </tr>
-        </thead>
-
-        <tbody class="insert-data">
-          <% for (let vote of voteHistory) { %>
-          <tr>
-            <td scope="row"><%= vote.users_id %></td>
-            <td scope="row"><%= vote.name %></td>
-            <td scope="row"><%= vote.choice %></td>
-            <td scope="row"><%= vote.point %></td>
-          </tr>
-          <% } %>
-
-        </tbody>
-      </table>
-    </div>
-  </center>
+          <tbody class="insert-data">
+            <% for (let vote of voteHistory) { %>
+            <tr>
+              <td scope="row"><%= vote.users_id %></td>
+              <td scope="row"><%= vote.name %></td>
+              <td scope="row"><%= vote.choice %></td>
+              <td scope="row"><%= vote.point %></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </center>
 
     <div class="poll-button">
       <button type="submit" class="btn btn-outline-danger">End Poll</button>
