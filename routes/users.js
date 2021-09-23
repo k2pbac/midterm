@@ -27,5 +27,7 @@ module.exports = (db) => {
     res.redirect("back");
 
   });
+
   return router;
-}
+
+};
