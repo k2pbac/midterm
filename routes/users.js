@@ -25,7 +25,9 @@ module.exports = (db) => {
     req.session.email = null;
 
     res.redirect("back");
+
   });
 
   return router;
+
 };

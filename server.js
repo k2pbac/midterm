@@ -45,11 +45,11 @@ app.use((req, res, next) => {
   res.locals.email = req.session.email;
   next();
 });
+
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const voteRoutes = require("./routes/votes");
-
 const newPollsRoutes = require("./routes/new_poll");
 const pollsRoutes = require("./routes/polls");
 const voteHelpers = require("./helpers/votehelpers")(db);
@@ -58,23 +58,15 @@ const pollHelpers = require("./helpers/pollHelpers");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", usersRoutes(db));
-
 app.use("/api/polls", newPollsRoutes(db));
-
 app.use("/polls", voteRoutes(voteHelpers));
 app.use("/polls", newPollsRoutes(db));
 app.use("/api/polls", pollsRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
-// const usersRoutes = require("./routes/users");
-
 const pollResultsRouter = require("./routes/pollResultsRouter");
 
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 // Note: mount other resources here, using the same pattern above
 // app.use("/api/results", resultsRoutes(db)); For rendering the page
