@@ -22,14 +22,14 @@
 
     <table id="bar-graph" class="charts-css bar show-primary-axis data-spacing-7 show-labels hide-data show-data-on-hover">
      <h3>
-        Poll Results
+        Poll Results:
     </h3>
 
       <tbody>
         <% for (let option of polls) { %>
         <tr>
           <th scope="row"><%= option.name %> </th>
-          <td style="--size: calc(<%= option.point_total %> / <%= total %>)"> <span class="data"> <%= option.point_total %> (<%= option.point_total/total*100 %> %) </span></td>
+          <td style="--size: calc(<%= option.point_total %> / <%= total %>)"> <span class="data"> <%= option.point_total %> (<%= Math.round(option.point_total/total*100) %> %) </span></td>
           <% } %>
         </tr>
       </tbody>
@@ -50,16 +50,18 @@
         </tr>
       </thead>
 
-      <tbody>
+      <tbody class="insert-data">
         <% for (let vote of voteHistory) { %>
           <tr>
-            <th scope="row"><%= vote.name %></th>
-            <td><%= vote.choice %></td>
-            <td><%= vote.point %></td>
+            <td scope="row"><%= vote.name %></td>
+            <td scope="row"><%= vote.choice %></td>
+            <td scope="row"><%= vote.point %></td>
           </tr>
         <% } %>
       </tbody>
+
     </table>
+
     </div>
 
     <div class="poll-button">
