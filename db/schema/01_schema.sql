@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS results CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255) NOT NULL,
+  name VARCHAR(255) DEFAULT 'Anonymous',
   email VARCHAR(255) NOT NULL
 );
 
@@ -25,7 +25,7 @@ CREATE TABLE polls (
 CREATE TABLE options (
   id SERIAL PRIMARY KEY NOT NULL,
   option VARCHAR(255) NOT NULL,
-  option_info TEXT NOT NULL,
+  option_info TEXT,
   poll_id INTEGER REFERENCES polls(id) ON DELETE CASCADE
 );
 

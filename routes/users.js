@@ -8,6 +8,7 @@
 const express = require("express");
 const router = express.Router();
 
+<<<<<<< HEAD
 module.exports = () => {
   router.post("/login", (req, res) => {
 const {email} = req.body;
@@ -25,6 +26,21 @@ const {email} = req.body;
     req.session.email = null;
 
     res.redirect("back");
+=======
+
+module.exports = (db) => {
+  router.get("/", (req, res) => {
+    db.query(`SELECT * FROM users;`)
+      .then(data => {
+        const users = data.rows;
+        res.json({ users });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+>>>>>>> Results_graphs
   });
   return router;
 };
