@@ -16,6 +16,23 @@ module.exports = (db) => {
       .then(data => {
         const polls = data.rows[0];
         console.log(data.rows[0]);
+        router.post("/", (req, res) => {
+          const user_id = req.session.user_id;
+          const poll_id = Math.random().toString(36).slice(2, 8);
+          const shared_link = `http://www.localhost:8080/api/polls/${poll_id}`;
+          const results_link = `http://www.localhost:8080/api/polls/${poll_id}/results`;
+          const is_active = true;
+          newPoll({ ...req.body, owner_id: user_id, poll_id, shared_link, results_link, is_active })
+            .then(poll => {
+              res.send(poll);
+            })
+            .catch(err => {
+              console.log(err.message);
+              console.error(err);
+              res.send(err)
+            })
+        })
+
         return { polls };
       })
       .catch(err => {
@@ -32,22 +49,5 @@ module.exports = (db) => {
     res.render("new_poll");
   });
 
-  router.post("/", (req, res) => {
-    const user_id = req.session.user_id;
-    const poll_id = Math.random().toString(36).slice(2, 8);
-    const shared_link = `http://www.localhost:8080/api/polls/${poll_id}`;
-    const results_link = `http://www.localhost:8080/api/polls/${poll_id}/results`;
-    const is_active = true;
-    newPoll({ ...req.body, owner_id: user_id, poll_id, shared_link, results_link, is_active })
-      .then(poll => {
-        // ^Error right before ".then"
-        res.send(poll);
-      })
-      .catch(err => {
-        console.log(err.message);
-        console.error(err);
-        res.send(err)
-      })
-  })
   return router;
 };
