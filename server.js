@@ -58,6 +58,9 @@ const pollHelpers = require("./helpers/pollHelpers");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", usersRoutes(db));
+
+app.use("/api/polls", newPollsRoutes(db));
+
 app.use("/polls", voteRoutes(voteHelpers));
 app.use("/polls", newPollsRoutes(db));
 app.use("/api/polls", pollsRoutes(db));
