@@ -1,5 +1,5 @@
 const express = require("express");
-
+const pollHelpers = require("../helpers/pollHelpers");
 const router = express.Router();
 
 module.exports = (voteHelpers) => {
@@ -16,7 +16,7 @@ module.exports = (voteHelpers) => {
     console.log(req.body);
     voteHelpers
       .insertUserVote(poll_id, req.body)
-      .then((results) => res.redirect("/"))
+      .then((results) => {pollHelpers.emailLinksToUser(); res.redirect("/"); })
       .catch((err) => console.log({ error: err.message }));
   });
   return router;
