@@ -19,7 +19,7 @@ const emailLinksToUser = (links, email) => {
 
 const renderHomePagePolls = (db) => {
   const queryString = {
-    text: `SELECT *, users.name, polls.id FROM polls
+    text: `SELECT polls.*, users.name, polls.id FROM polls
     JOIN users on users.id = creator_id
     WHERE is_active = true;`,
   };

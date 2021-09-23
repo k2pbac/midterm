@@ -15,20 +15,16 @@ module.exports = (userHelpers) => {
     userHelpers
       .insertUser(email)
       .then((result) => {
-        console.log(result);
-        res.redirect("/");
+        // cookie-session
+        req.session.user_id = Number(result);
+        req.session.email = email;
+
+        // redirect the client
+        res.redirect("back");
       })
       .catch((err) => {
         err.message;
       });
-
-    console.log("Email:", email);
-    // cookie-session
-    req.session.user_id = req.params.id;
-    req.session.email = email;
-
-    // redirect the client
-    res.redirect("back");
   });
 
   router.post("/logout", (req, res) => {

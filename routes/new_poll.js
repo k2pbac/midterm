@@ -7,8 +7,32 @@
 
 const express = require("express");
 const router = express.Router();
+var format = require("pg-format");
 
 module.exports = (db) => {
+  const insertOptions = (optionInfo, poll_id) => {
+    const results = [];
+    let count = 1;
+    for (let option in optionInfo) {
+      if (option && option.length && optionInfo[`option${count}`]) {
+        results.push([optionInfo[`option${count}`], "NA", Number(poll_id)]);
+        count++;
+      }
+    }
+    return db
+      .query(
+        format(
+          `INSERT INTO options (option, option_info, poll_id)
+            VALUES %L`,
+          results
+        )
+      )
+      .then((results) => {
+        return results;
+      })
+      .catch((err) => err.message);
+  };
+
   const newPoll = (poll) => {
     return db
       .query(
@@ -28,7 +52,6 @@ module.exports = (db) => {
       )
       .then((data) => {
         const polls = data.rows[0];
-        console.log("Data", data.rows[0]);
         return polls;
       })
       .catch((err) => {
@@ -46,7 +69,6 @@ module.exports = (db) => {
     const shared_link = `http://www.localhost:8080/api/polls/${poll_id}`;
     const results_link = `http://www.localhost:8080/api/polls/${poll_id}/results`;
     const is_active = true;
-    console.log(req.body);
     newPoll({
       ...req.body,
       creator_id: user_id,
@@ -56,11 +78,14 @@ module.exports = (db) => {
       is_active,
     })
       .then((poll) => {
-        res.send(poll);
+        insertOptions(req.body, poll.id)
+          .then((results) => {
+            return res.redirect("/");
+          })
+          .catch((err) => err.message);
       })
       .catch((err) => {
         console.log(err.message);
-        console.error(err);
         res.send(err);
       });
   });

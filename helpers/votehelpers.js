@@ -33,7 +33,6 @@ module.exports = (db) => {
   };
 
   const insertUserVote = (poll_id, vote_data, voter_id) => {
-    console.log(vote_data);
     const values = [];
     for (let vote in vote_data) {
       for (let point of vote_data[vote]) {
@@ -45,6 +44,7 @@ module.exports = (db) => {
         ]);
       }
     }
+
     return db
       .query(
         format(

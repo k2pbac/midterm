@@ -6,8 +6,11 @@ module.exports = (voteHelpers, userHelpers) => {
     const { poll_id } = req.params;
     voteHelpers
       .renderVoterView(poll_id)
-      .then((result) => res.render("user_vote", { poll: result }))
-      .catch((err) => res.send(err.message));
+      .then((result) => {
+        console.log(result);
+        res.render("user_vote", { poll: result });
+      })
+      .catch((err) => err.message);
   });
   router.post("/:poll_id/vote", (req, res) => {
     const { poll_id } = req.params;

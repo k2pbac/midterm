@@ -2,7 +2,7 @@ module.exports = (db) => {
   const insertUser = (userInfo) => {
     const queryString = {
       text: `INSERT INTO users (email)
-            VALUES ($1)`,
+            VALUES ($1) Returning *`,
       values: [userInfo],
     };
 
@@ -10,7 +10,7 @@ module.exports = (db) => {
       .query(queryString)
       .then((results) => {
         console.log(results.row);
-        return results.row;
+        return Object.values(results)[3][0].id;
       })
       .catch((err) => err.message);
   };
