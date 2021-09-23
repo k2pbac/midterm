@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/new_poll.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -25,7 +24,6 @@
         <h4><input name="description" type="text" id="description" class="description" placeholder="Poll description" maxlength="255"></h4>
       </div>
       <ul>
-        <input type="hidden">
         <% for (let i = 1; i < 5; i++) { %>
         <br>
         <li><input name="option<%= i %>" type="text" id="option<%= i %>" class="option" maxlength="255"></li>
