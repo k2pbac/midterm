@@ -3,14 +3,14 @@ var format = require("pg-format");
 module.exports = (db) => {
   const renderPollView = (poll_id) => {
     const queryText = {
-      text: `SELECT *, name, options.id FROM polls
+      text: `SELECT *, name, options.id, polls.id FROM polls
             JOIN options on poll_id = polls.id
             JOIN users on creator_id = users.id
             WHERE options.poll_id = $1;
           `,
       values: [poll_id],
     };
-
+    console.log(poll_id);
     return db
       .query(queryText)
       .then((data) => {

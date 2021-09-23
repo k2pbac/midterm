@@ -1,9 +1,13 @@
 // See: https://sass-lang.com/
 
 body {
-  background-color: #EEE;
+  // background-color: #eee;
 
   h1 {
     color: #244751;
+  }
+  div.jumbotron {
+    background-color: #31753b;
+    background-image: url("https://www.transparenttextures.com/patterns/bedge-grunge.png");
   }
 }
