@@ -7,7 +7,6 @@ module.exports = (voteHelpers, userHelpers) => {
     voteHelpers
       .renderVoterView(poll_id)
       .then((result) => {
-        console.log(result);
         res.render("user_vote", { poll: result });
       })
       .catch((err) => err.message);
@@ -20,8 +19,6 @@ module.exports = (voteHelpers, userHelpers) => {
     userHelpers
       .insertVoter(name)
       .then((results) => {
-        console.log("User ID:", results);
-
         voteHelpers
           .insertUserVote(poll_id, req.body, results)
           .then((results2) => {

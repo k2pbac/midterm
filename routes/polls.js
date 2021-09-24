@@ -45,7 +45,7 @@ module.exports = (pollHelpers) => {
     res.render("new_poll");
   });
 
-  router.get("/polls/results/:poll_id", (req, res) => {
+  router.get("/polls/:poll_id/results", (req, res) => {
     const { poll_id } = req.params;
 
     pollHelpers

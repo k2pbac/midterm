@@ -31,7 +31,7 @@ module.exports = (userHelpers) => {
     req.session.user_id = null;
     req.session.email = null;
 
-    res.redirect("back");
+    res.redirect("/");
   });
 
   return router;

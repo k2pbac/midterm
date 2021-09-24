@@ -60,8 +60,8 @@ module.exports = (db) => {
   const newPoll = (poll) => {
     return db
       .query(
-        `INSERT INTO polls (title, description, creator_id, created_at, updated_at, shared_link, results_link, is_active, max_submission)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+        `INSERT INTO polls (title, description, creator_id, created_at, updated_at, is_active, max_submission)
+    VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
         [
           poll.title,
           poll.description,
@@ -73,16 +73,25 @@ module.exports = (db) => {
         ]
       )
       .then((data) => {
-        console.log(data);
-        // db.query(`ALTER `)
         const polls = data.rows[0];
-        return polls;
+        const poll_id = Number(data.rows[0].id);
+
+        const linkQuery = `
+        UPDATE polls
+        SET shared_link = 'https://morning-ridge-80955.herokuapp.com/polls/${poll_id}',
+            results_link = 'https://morning-ridge-80955.herokuapp.com/polls/${poll_id}/results'
+        WHERE polls.id = ${poll_id}q`;
+
+        return db
+          .query(linkQuery)
+          .then((result) => {
+            return result;
+          })
+          .catch((err) => {
+            return err.message;
+          });
       })
       .catch((err) => {
-        // res
-        //   .status(500)
-        //   .json({ error: err.message });
-        console.log({ error: err.message });
         return { error: err.message };
       });
   };
