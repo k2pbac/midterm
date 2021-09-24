@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/new_poll.css" type="text/css" />
 
     <link
       rel="stylesheet"
@@ -25,10 +26,12 @@
 
   <body>
     <%- include("./partials/_header") %>
-    <div class="container text-center">
+    <main>
+    <div class="container text-center shadow-lg">
+      <br>
       <h1>New Poll</h1>
-      <form action="/api/polls" method="POST">
-        <div>
+      <form class="new_poll" action="/api/polls" method="POST">
+        <div class="titles">
           <h2>
             <input
               name="title"
@@ -50,10 +53,11 @@
           </h4>
         </div>
         <ul>
-          <input type="hidden" />
           <% for (let i = 1; i < 5; i++) { %>
-          <br />
+          <br>
+          <div class="list-item">
           <li>
+            <h5>
             <input
               name="option<%= i %>"
               type="text"
@@ -61,8 +65,10 @@
               class="option"
               maxlength="255"
             />
+          </h5>
           </li>
           <li>
+            <h6>
             <input
               name="description<%= i %>"
               type="text"
@@ -71,14 +77,16 @@
               placeholder="Description"
               maxlength="255"
             />
+          </h6>
           </li>
+        </div>
           <% } %>
         </ul>
         <a href="javascript:addField()" id="add_option"
-          >Add another option field</a
-        >
-        <div><button class="btn btn-success">Create poll</button></div>
+          >Add another option field</a>
+        <div class="button"><button class="btn btn-success">Create poll</button></div>
       </form>
     </div>
+  </main>
   </body>
 </html>
