@@ -8,36 +8,45 @@
   --labels-size: 100px;
   --primary-axis-style: solid;
   --primary-axis-width: 2px;
-  }
+}
 
-  h1 {
-    padding-top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+h1 {
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  h3 {
-    margin-left: 20px;
-  }
+h3 {
+  margin-left: 20px;
+}
 
+#bar-graph th {
+  animation: spin-labels 3s linear;
+}
+@keyframes spin-labels {
+  0% {
+    transform: rotateX(0deg);
+  }
+  40% {
+    transform: rotateX(360deg);
+  }
+  100% {
+    transform: rotateX(360deg);
+  }
+}
 
-  #bar-graph th {
-    animation: spin-labels 3s linear;
+#bar-graph tbody td {
+  animation: moving-bars 2s linear;
+}
+@keyframes moving-bars {
+  0% {
+    transform: translateX(100%);
   }
-  @keyframes spin-labels {
-    0%   { transform: rotateX(   0deg ); }
-    40%  { transform: rotateX( 360deg ); }
-    100% { transform: rotateX( 360deg ); }
+  15% {
+    transform: translateX(0);
   }
-
-  #bar-graph tbody td {
-    animation: moving-bars 2s linear;
-  }
-  @keyframes moving-bars {
-    0%  { transform: translateX( 100% ); }
-    15% { transform: translateX( 0 ); }
-  }
+}
 
   table {
     width: 800px;
@@ -52,26 +61,26 @@
 
   table th,table td {
     width: 200px;
-    }
+  }
 
   table tbody {
     display:block;
     height:200px;
     overflow:auto;
-   }
+  }
 
    .purple{
     background-color: purple;
     color: white;
-   }
-
-  .insert-data tr:hover {
-    background-color: rgb(233, 233, 47);
   }
 
-  .poll-button {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin: 20px;
-  }
+.insert-data tr:hover {
+  background-color: rgb(233, 233, 47);
+}
+
+.poll-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 20px;
+}
