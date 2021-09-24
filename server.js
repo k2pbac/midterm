@@ -1,5 +1,5 @@
 // load .env data into process.env
-require("dotenv").config();
+require("dotenv").config({ silent: true });
 
 // Web server config
 const PORT = process.env.PORT || 8080;
@@ -50,23 +50,16 @@ app.use((req, res, next) => {
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const voteRoutes = require("./routes/votes");
-const newPollsRoutes = require("./routes/new_poll");
+const pollRoutes = require("./routes/polls");
 const voteHelpers = require("./helpers/votehelpers")(db);
 const userHelpers = require("./helpers/userHelpers")(db);
 const pollHelpers = require("./helpers/pollHelpers")(db);
-const pollResultsRouter = require("./routes/pollResultsRouter");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", usersRoutes(userHelpers));
-app.use("/api/polls", newPollsRoutes(pollHelpers));
-app.use("/polls", voteRoutes(voteHelpers, userHelpers));
-app.use("/polls", newPollsRoutes(db));
-
-app.use("/api/users", usersRoutes(db));
-// Note: mount other resources here, using the same pattern above
-// app.use("/api/results", resultsRoutes(db)); For rendering the page
-app.use("/results", pollResultsRouter(db));
+app.use("/", pollRoutes(pollHelpers));
+app.use("/", voteRoutes(voteHelpers, userHelpers));
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -78,6 +71,10 @@ app.get("/", (req, res) => {
       res.render("index", polls);
     })
     .catch((err) => err.message);
+});
+
+app.use("*", (req, res) => {
+  res.redirect("/");
 });
 
 app.listen(PORT, () => {

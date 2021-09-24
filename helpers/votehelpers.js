@@ -37,7 +37,7 @@ module.exports = (db) => {
     for (let vote in vote_data) {
       for (let point of vote_data[vote]) {
         values.push([
-          Object.values(vote_data).length + 1 - Number(point),
+          Object.values(vote_data).length - Number(point),
           vote,
           voter_id,
           poll_id,

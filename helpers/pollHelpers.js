@@ -60,29 +60,83 @@ module.exports = (db) => {
   const newPoll = (poll) => {
     return db
       .query(
-        `INSERT INTO polls (title, description, creator_id, created_at, updated_at, shared_link, results_link, is_active, max_submission)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+        `INSERT INTO polls (title, description, creator_id, created_at, updated_at, is_active, max_submission)
+    VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
         [
           poll.title,
           poll.description,
           poll.creator_id,
           poll.created_at,
           poll.updated_at,
-          poll.shared_link,
-          poll.results_link,
           poll.is_active,
           poll.max_submission,
         ]
       )
       .then((data) => {
         const polls = data.rows[0];
+
         return polls;
       })
       .catch((err) => {
-        // res
-        //   .status(500)
-        //   .json({ error: err.message });
-        console.log({ error: err.message });
+        return { error: err.message };
+      });
+  };
+
+  const insertLinks = (poll_id) => {
+    const linkQuery = `
+        UPDATE polls
+        SET shared_link = 'https://morning-ridge-80955.herokuapp.com/polls/${poll_id}',
+            results_link = 'https://morning-ridge-80955.herokuapp.com/polls/${poll_id}/results'
+        WHERE polls.id = ${poll_id}`;
+
+    return db
+      .query(linkQuery)
+      .then((result) => {
+        return result;
+      })
+      .catch((err) => {
+        return err.message;
+      });
+  };
+
+  const renderPollResults = (poll_id) => {
+    // Get results for a specific poll
+
+    const promise1 = db.query(
+      `
+      SELECT  options.option as name, SUM(point) as point_total, results.poll_id as poll, polls.title as question
+      FROM results
+      JOIN options ON option_id = options.id
+      JOIN polls ON results.poll_id = polls.id
+      WHERE results.poll_id = $1
+      GROUP BY options.option, results.poll_id, polls.title
+      ORDER BY poll, point_total DESC;`,
+      [poll_id]
+    );
+
+    const promise2 = db.query(
+      `
+      SELECT voter_id AS users_id,  users.name as name, options.option AS choice, results.point AS point
+      FROM results
+      JOIN users ON voter_id = users.id
+      JOIN options ON option_id = options.id
+      WHERE results.poll_id = $1
+      GROUP BY users.name, voter_id, options.option, results.point
+      ORDER BY name, point DESC`,
+      [poll_id]
+    );
+
+    return Promise.all([promise1, promise2])
+      .then((response) => {
+        const [query1, query2] = response;
+        let total = 0;
+        query1.rows.forEach((element) => {
+          total += parseInt(element.point_total);
+        });
+
+        return { total, polls: query1.rows, voteHistory: query2.rows };
+      })
+      .catch((err) => {
         return { error: err.message };
       });
   };
@@ -92,5 +146,7 @@ module.exports = (db) => {
     renderHomePagePolls,
     insertOptions,
     newPoll,
+    renderPollResults,
+    insertLinks,
   };
 };

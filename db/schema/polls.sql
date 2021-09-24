@@ -8,8 +8,8 @@ CREATE TABLE polls (
   creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
-  shared_link VARCHAR(255) NOT NULL,
-  results_link VARCHAR(255) NOT NULL,
+  shared_link VARCHAR(255),
+  results_link VARCHAR(255),
   is_active BOOLEAN NOT NULL DEFAULT TRUE,
   max_submission INTEGER DEFAULT 100
 );

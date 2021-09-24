@@ -9,7 +9,6 @@ module.exports = (db) => {
     return db
       .query(queryString)
       .then((results) => {
-        console.log(results.row);
         return Object.values(results)[3][0].id;
       })
       .catch((err) => err.message);
@@ -29,7 +28,7 @@ module.exports = (db) => {
       })
       .catch((err) => {
         console.log(err.message);
-        err.message;
+        return err.message;
       });
   };
 
