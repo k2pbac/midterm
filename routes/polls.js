@@ -9,34 +9,42 @@ module.exports = (pollHelpers) => {
   //POST route to create a new post
   router.post("/polls", (req, res) => {
     const user_id = req.session.user_id;
-    const poll_id = Math.random().toString(36).slice(2, 8);
-    const shared_link = `https://morning-ridge-80955.herokuapp.com/polls/${poll_id}`;
-    const results_link = `https://morning-ridge-80955.herokuapp.com/polls/results/${poll_id}`;
     const is_active = true;
     pollHelpers
       .newPoll({
         ...req.body,
         creator_id: user_id,
-        poll_id,
-        shared_link,
-        results_link,
         is_active,
       })
       .then((poll) => {
         pollHelpers
           .insertOptions(req.body, poll.id)
           .then((results) => {
+            const shared_link = `https://morning-ridge-80955.herokuapp.com/polls/${poll.id}`;
+            const results_link = `https://morning-ridge-80955.herokuapp.com/polls/${poll.id}/results`;
             pollHelpers.emailLinksToUser(
               { shared_link, results_link },
               req.session.email
             );
-            res.redirect("/");
+
+            pollHelpers
+              .insertLinks(poll.id)
+              .then((results) => {
+                res.redirect("/");
+              })
+              .catch((err) => {
+                console.log(err.message);
+                res.redirect("/");
+              });
           })
-          .catch((err) => err.message);
+          .catch((err) => {
+            console.log(err.message);
+            res.redirect("/");
+          });
       })
       .catch((err) => {
         console.log(err.message);
-        res.send(err);
+        res.redirect("/");
       });
   });
   //GET route to view the create poll page
@@ -55,7 +63,10 @@ module.exports = (pollHelpers) => {
           ...result,
         })
       )
-      .catch((err) => res.status(500).json({ error: err.message }));
+      .catch((err) => {
+        console.log(err.message);
+        res.redirect("/");
+      });
   });
 
   return router;

@@ -74,25 +74,28 @@ module.exports = (db) => {
       )
       .then((data) => {
         const polls = data.rows[0];
-        const poll_id = Number(data.rows[0].id);
 
-        const linkQuery = `
-        UPDATE polls
-        SET shared_link = 'https://morning-ridge-80955.herokuapp.com/polls/${poll_id}',
-            results_link = 'https://morning-ridge-80955.herokuapp.com/polls/${poll_id}/results'
-        WHERE polls.id = ${poll_id}q`;
-
-        return db
-          .query(linkQuery)
-          .then((result) => {
-            return result;
-          })
-          .catch((err) => {
-            return err.message;
-          });
+        return polls;
       })
       .catch((err) => {
         return { error: err.message };
+      });
+  };
+
+  const insertLinks = (poll_id) => {
+    const linkQuery = `
+        UPDATE polls
+        SET shared_link = 'https://morning-ridge-80955.herokuapp.com/polls/${poll_id}',
+            results_link = 'https://morning-ridge-80955.herokuapp.com/polls/${poll_id}/results'
+        WHERE polls.id = ${poll_id}`;
+
+    return db
+      .query(linkQuery)
+      .then((result) => {
+        return result;
+      })
+      .catch((err) => {
+        return err.message;
       });
   };
 
@@ -144,5 +147,6 @@ module.exports = (db) => {
     insertOptions,
     newPoll,
     renderPollResults,
+    insertLinks,
   };
 };
