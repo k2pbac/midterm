@@ -92,7 +92,6 @@
 
     <h1>Voting History</h1>
     <center>
-<<<<<<< HEAD
       <div class="shadow-lg">
         <table class="table table-bordered">
           <thead>
@@ -113,30 +112,6 @@
             </tr>
             <% } %>
           </tbody>
-=======
-      <div class="results-table shadow-lg">
-        <div class="d-flex flex-column">
-        <table class="table table-bordered">
-            <thead class="purple">
-              <tr>
-                <th scope="col">Voter Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Choice</th>
-                <th scope="col">Point</th>
-              </tr>
-            </thead>
-            <tbody class="insert-data">
-              <% for (let vote of voteHistory) { %>
-              <tr>
-                <td scope="row"><%= vote.users_id %></td>
-                <td scope="row"><%= vote.name %></td>
-                <td scope="row"><%= vote.choice %></td>
-                <td scope="row"><%= vote.point %></td>
-              </tr>
-              <% } %>
-            </tbody>
-          </div>
->>>>>>> 36d153c69aca7088a9e923dec36b1f8176d342f3
         </table>
       </div>
     </center>
