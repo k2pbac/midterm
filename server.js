@@ -51,22 +51,17 @@ app.use((req, res, next) => {
 const usersRoutes = require("./routes/users");
 const voteRoutes = require("./routes/votes");
 const newPollsRoutes = require("./routes/new_poll");
-const pollsRoutes = require("./routes/polls");
 const voteHelpers = require("./helpers/votehelpers")(db);
 const userHelpers = require("./helpers/userHelpers")(db);
-const pollHelpers = require("./helpers/pollHelpers");
+const pollHelpers = require("./helpers/pollHelpers")(db);
+const pollResultsRouter = require("./routes/pollResultsRouter");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", usersRoutes(userHelpers));
-app.use("/api/polls", newPollsRoutes(db));
+app.use("/api/polls", newPollsRoutes(pollHelpers));
 app.use("/polls", voteRoutes(voteHelpers, userHelpers));
 app.use("/polls", newPollsRoutes(db));
-app.use("/api/polls", pollsRoutes(db));
-
-// Note: mount other resources here, using the same pattern above
-
-const pollResultsRouter = require("./routes/pollResultsRouter");
 
 app.use("/api/users", usersRoutes(db));
 // Note: mount other resources here, using the same pattern above
@@ -78,7 +73,7 @@ app.use("/results", pollResultsRouter(db));
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
   pollHelpers
-    .renderHomePagePolls(db)
+    .renderHomePagePolls()
     .then((polls) => {
       res.render("index", polls);
     })
