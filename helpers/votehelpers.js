@@ -1,4 +1,4 @@
-var format = require("pg-format");
+const format = require("pg-format");
 
 module.exports = (db) => {
   const renderVoterView = (poll_id) => {

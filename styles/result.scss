@@ -8,72 +8,82 @@
   --labels-size: 100px;
   --primary-axis-style: solid;
   --primary-axis-width: 2px;
-  }
+}
 
-  h1 {
-    padding-top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+h1 {
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  h3 {
-    margin-left: 20px;
-  }
+h3 {
+  margin-left: 20px;
+}
 
+#bar-graph th {
+  animation: spin-labels 3s linear;
+}
+@keyframes spin-labels {
+  0% {
+    transform: rotateX(0deg);
+  }
+  40% {
+    transform: rotateX(360deg);
+  }
+  100% {
+    transform: rotateX(360deg);
+  }
+}
 
-  #bar-graph th {
-    animation: spin-labels 3s linear;
+#bar-graph tbody td {
+  animation: moving-bars 2s linear;
+}
+@keyframes moving-bars {
+  0% {
+    transform: translateX(100%);
   }
-  @keyframes spin-labels {
-    0%   { transform: rotateX(   0deg ); }
-    40%  { transform: rotateX( 360deg ); }
-    100% { transform: rotateX( 360deg ); }
+  15% {
+    transform: translateX(0);
   }
+}
 
-  #bar-graph tbody td {
-    animation: moving-bars 2s linear;
-  }
-  @keyframes moving-bars {
-    0%  { transform: translateX( 100% ); }
-    15% { transform: translateX( 0 ); }
-  }
+.results-table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  width: 500px;
+  height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
 
-  .results-table {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    width: 500px;
-    height: 400px;
-    overflow:hidden;
-    overflow-y: scroll;
-  }
+th,
+td {
+  padding: 0.25rem;
+}
 
-  th, td {
-    padding: 0.25rem;
-  }
+.purple th {
+  background: purple;
+  color: white;
+}
 
-  .purple th {
-    background: purple;
-    color: white;
-  }
+th {
+  background: white;
+  position: sticky;
+  top: 0;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
 
-  th {
-    background: white;
-    position: sticky;
-    top: 0;
-    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
-  }
+.insert-data tr:hover {
+  background-color: rgb(233, 233, 47);
+}
 
-  .insert-data tr:hover {
-    background-color: rgb(233, 233, 47);
-  }
-
-  .poll-button {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin: 20px;
-  }
+.poll-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 20px;
+}
