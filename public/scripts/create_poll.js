@@ -4,8 +4,10 @@ $('document').ready(function() {
     let n = $(".option").length++;
     const field =
       `<br>
-      <li><input type="text" name="option${n + 1}" id="option${n + 1}" class="option" maxlength="255"></li>
-      <li><input name="description${n + 1}" type="text" id="description${n + 1}" class="description" placeholder="Description" maxlength="255"></li>`;
+      <div class="list-item">
+      <li><h5><input type="text" name="option${n + 1}" id="option${n + 1}" class="option" maxlength="255"></h5></li>
+      <li><h6><input name="description${n + 1}" type="text" id="description${n + 1}" class="description" placeholder="Description" maxlength="255"></h6></li>
+      </div>`;
     return field;
   }
 

@@ -1,0 +1,41 @@
+div.container {
+  background-color: lightblue;
+  padding-bottom: 100px;
+}
+
+div h1 {
+  font-size: 3.5rem;
+  padding-bottom: 25px;
+}
+
+form.new_poll {
+  border: black solid;
+  padding: 50px 0px;
+  margin: 0px 100px;
+}
+
+div.titles {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  padding: 0px 260px;
+}
+
+div.list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  padding: 0px 260px;
+}
+
+li::marker {
+  color: transparent;
+}
+
+div.button {
+  padding: 25px;
+}
+
+div.button button {
+  font-size: 2rem;
+}
