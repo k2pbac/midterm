@@ -85,17 +85,16 @@
 
     <h1>Voting History</h1>
     <center>
-      <div class="results-table shadow-lg">
+      <div class="shadow-lg">
         <table class="table table-bordered">
-          <thead class="purple">
-            <tr>
-              <th scope="col">Voter Id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Choice</th>
-              <th scope="col">Point</th>
+          <thead>
+            <tr >
+              <th class="purple" scope="col">Voter Id</th>
+              <th class="purple" scope="col">Name</th>
+              <th class="purple" scope="col">Choice</th>
+              <th class="purple" scope="col">Point</th>
             </tr>
           </thead>
-
           <tbody class="insert-data">
             <% for (let vote of voteHistory) { %>
             <tr>

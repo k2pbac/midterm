@@ -39,33 +39,31 @@
     15% { transform: translateX( 0 ); }
   }
 
-  .results-table {
+  table {
+    width: 800px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    width: 500px;
-    height: 400px;
-    overflow:hidden;
-    overflow-y: scroll;
+    align-items: center;
   }
 
-  th, td {
-    padding: 0.25rem;
+  table thead tr {
+    display:block;
   }
 
-  .purple th {
-    background: purple;
+  table th,table td {
+    width: 200px;
+    }
+
+  table tbody {
+    display:block;
+    height:200px;
+    overflow:auto;
+   }
+
+   .purple{
+    background-color: purple;
     color: white;
-  }
-
-  th {
-    background: white;
-    position: sticky;
-    top: 0;
-    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
-  }
+   }
 
   .insert-data tr:hover {
     background-color: rgb(233, 233, 47);
