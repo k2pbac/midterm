@@ -68,13 +68,13 @@ module.exports = (db) => {
           poll.creator_id,
           poll.created_at,
           poll.updated_at,
-          poll.shared_link,
-          poll.results_link,
           poll.is_active,
           poll.max_submission,
         ]
       )
       .then((data) => {
+        console.log(data);
+        // db.query(`ALTER `)
         const polls = data.rows[0];
         return polls;
       })
@@ -87,10 +87,53 @@ module.exports = (db) => {
       });
   };
 
+  const renderPollResults = (poll_id) => {
+    // Get results for a specific poll
+
+    const promise1 = db.query(
+      `
+      SELECT  options.option as name, SUM(point) as point_total, results.poll_id as poll, polls.title as question
+      FROM results
+      JOIN options ON option_id = options.id
+      JOIN polls ON results.poll_id = polls.id
+      WHERE results.poll_id = $1
+      GROUP BY options.option, results.poll_id, polls.title
+      ORDER BY poll, point_total DESC;`,
+      [poll_id]
+    );
+
+    const promise2 = db.query(
+      `
+      SELECT voter_id AS users_id,  users.name as name, options.option AS choice, results.point AS point
+      FROM results
+      JOIN users ON voter_id = users.id
+      JOIN options ON option_id = options.id
+      WHERE results.poll_id = $1
+      GROUP BY users.name, voter_id, options.option, results.point
+      ORDER BY name, point DESC`,
+      [poll_id]
+    );
+
+    return Promise.all([promise1, promise2])
+      .then((response) => {
+        const [query1, query2] = response;
+        let total = 0;
+        query1.rows.forEach((element) => {
+          total += parseInt(element.point_total);
+        });
+
+        return { total, polls: query1.rows, voteHistory: query2.rows };
+      })
+      .catch((err) => {
+        return { error: err.message };
+      });
+  };
+
   return {
     emailLinksToUser,
     renderHomePagePolls,
     insertOptions,
     newPoll,
+    renderPollResults,
   };
 };
