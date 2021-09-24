@@ -1,6 +1,6 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <img src="images/logo3.png" width="30" height="30" alt="" />
+    <img src="/images/logo.png" width="30" height="30" alt="" />
     <a class="navbar-brand pl-2" href="/">TBD Inc.</a>
     <button
       class="navbar-toggler"
@@ -15,15 +15,23 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <% if (email) { %>
-      <div class="navbar-nav ml-auto">
+      <div class="navbar-nav">
         <li class="nav-item">
-          <span class="nav-link text-white"><%= email %></span>
+          <a class="nav-link my-sm-0 text-white" href="/">Home</a>
         </li>
+      </div>
+
+      <% if (email) { %>
+      <div class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link my-sm-0 text-white" href="/polls/new"
             >Create Poll</a
           >
+        </li>
+      </div>
+      <div class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <span class="nav-link text-white"><%= email %></span>
         </li>
       </div>
       <form class="form-inline my-2 my-lg-0" method="POST" action="/logout">

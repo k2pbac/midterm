@@ -21,72 +21,72 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
-    <script type="text/javascript" src="/scripts/create_poll.js"></script>
   </head>
 
   <body>
     <%- include("./partials/_header") %>
     <main>
-    <div class="container text-center shadow-lg">
-      <br>
-      <h1>New Poll</h1>
-      <form class="new_poll" action="/api/polls" method="POST">
-        <div class="titles">
-          <h2>
-            <input
-              name="title"
-              type="text"
-              class="question"
-              placeholder="Poll question"
-              maxlength="255"
-            />
-          </h2>
-          <h4>
-            <input
-              name="description"
-              type="text"
-              id="description"
-              class="description"
-              placeholder="Poll description"
-              maxlength="255"
-            />
-          </h4>
-        </div>
-        <ul>
-          <% for (let i = 1; i < 5; i++) { %>
-          <br>
-          <div class="list-item">
-          <li>
-            <h5>
-            <input
-              name="option<%= i %>"
-              type="text"
-              id="option<%= i %>"
-              class="option"
-              maxlength="255"
-            />
-          </h5>
-          </li>
-          <li>
-            <h6>
-            <input
-              name="description<%= i %>"
-              type="text"
-              id="description<%= i %>"
-              class="description"
-              placeholder="Description"
-              maxlength="255"
-            />
-          </h6>
-          </li>
-        </div>
-          <% } %>
-        </ul>
-        <a href="javascript:addField()" id="add_option"
-          >Add another option field</a>
-        <div class="button"><button class="btn btn-success">Create poll</button></div>
-      </form>
-    </div>
-  </main>
+      <div class="container text-center shadow-lg mx-auto mt-5 w-75">
+        <br />
+        <h1>New Poll</h1>
+        <form class="new_poll" action="/api/polls" method="POST">
+          <div class="titles">
+            <h2>
+              <input
+                name="title"
+                type="text"
+                class="question"
+                placeholder="Poll question"
+                maxlength="255"
+              />
+            </h2>
+            <h4>
+              <input
+                name="description"
+                type="text"
+                id="description"
+                class="description"
+                placeholder="Poll description"
+                maxlength="255"
+              />
+            </h4>
+          </div>
+          <ul>
+            <% for (let i = 1; i < 5; i++) { %>
+            <br />
+            <div class="list-item">
+              <li>
+                <label class="d-block" for="option<%= i %>"
+                  >Option <%= i %>:
+                </label>
+                <input
+                  name="option<%= i %>"
+                  type="text"
+                  id="option<%= i %>"
+                  class="option"
+                  maxlength="255"
+                />
+              </li>
+              <li>
+                <input
+                  name="description<%= i %>"
+                  type="text"
+                  id="description<%= i %>"
+                  class="description"
+                  placeholder="Description"
+                  maxlength="255"
+                />
+              </li>
+            </div>
+            <% } %>
+          </ul>
+          <a id="add_option">Add another option field</a>
+          <div class="button">
+            <button class="btn btn-success">Create poll</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script type="text/javascript" src="/scripts/create_poll.js"></script>
   </body>
 </html>

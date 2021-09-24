@@ -58,8 +58,8 @@ const pollHelpers = require("./helpers/pollHelpers")(db);
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", usersRoutes(userHelpers));
-app.use("/polls", voteRoutes(voteHelpers, userHelpers));
 app.use("/", pollRoutes(pollHelpers));
+app.use("/", voteRoutes(voteHelpers, userHelpers));
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -71,6 +71,10 @@ app.get("/", (req, res) => {
       res.render("index", polls);
     })
     .catch((err) => err.message);
+});
+
+app.use("*", (req, res) => {
+  res.redirect("/");
 });
 
 app.listen(PORT, () => {

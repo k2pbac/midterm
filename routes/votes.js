@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (voteHelpers, userHelpers) => {
-  router.get("/:poll_id", (req, res) => {
+  router.get("/polls/:poll_id", (req, res) => {
     const { poll_id } = req.params;
     voteHelpers
       .renderVoterView(poll_id)
@@ -12,7 +12,7 @@ module.exports = (voteHelpers, userHelpers) => {
       })
       .catch((err) => err.message);
   });
-  router.post("/:poll_id/vote", (req, res) => {
+  router.post("/polls/:poll_id/vote", (req, res) => {
     const { poll_id } = req.params;
     const { name } = req.body;
     delete req.body.name;
